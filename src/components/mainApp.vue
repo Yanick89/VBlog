@@ -1,19 +1,19 @@
 <template>
  <div class="main-contenair-home">
    <div class="main-contenair">
-     <navBarLeft />
+     <!-- <navBarLeft /> -->
      <container ref="mainContenair"/>
    </div>
  </div>
 </template>
 
 <script>
-import navBarLeft from './view/navBarLeft'
+// import navBarLeft from './view/navBarLeft'
 import container from '../components/view/contenair'
 export default {
   name: 'main',
   components:{
-    navBarLeft,
+    // navBarLeft,
     container
   },
   data () {
