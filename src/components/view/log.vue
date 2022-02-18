@@ -23,18 +23,18 @@
           <form action="">
             <label for="name">
               Nom:
-              <input type="text" name="" id="name" placeholder="nom">
+              <input type="text" v-model="createUser.name" id="name" placeholder="nom">
             </label>
             <label for="mail">
               Email:
-              <input type="email" name="" id="mail" placeholder="mouzx@y.com">
+              <input type="email" v-model="createUser.userName" id="mail" placeholder="mouzx@y.com">
             </label>
             <label for="password">
               Mot de passe:
-              <input type="password" name="" id="password" placeholder="mot de passe">
+              <input type="password" v-model="createUser.passWord" id="password" placeholder="mot de passe">
             </label>
             <div class="submit">
-              <button type="submit"> Enregister</button>
+              <button type="submit" @click="signUp()"> Enregister</button>
             </div>
           </form>
         </div>
@@ -66,11 +66,11 @@
           <form action="">
             <label for="mail">
               Email:
-              <input type="email" name="" id="mail" placeholder="mouzx@y.com">
+              <input type="email" v-model="connectUser.userName" id="mail" placeholder="mouzx@y.com">
             </label>
             <label for="password">
               Mot de passe:
-              <input type="password" name="" id="password" placeholder="mot de passe">
+              <input type="password" v-model="connectUser.passWord" id="password" placeholder="mot de passe">
             </label>
             <div class="submit">
               <button type="submit"> Connexion</button>
@@ -86,13 +86,25 @@
 </template>
 
 <script>
+import firbase from '../../firebase';
+import {auth, db} from '../../firebase';
+import {createUserWithEmailAndPassword } from "firebase/auth";
 export default {
   name: 'logUser',
   data () {
     return {
       showModalSignUp: false,
       showModalSignIn: false,
-      isActive: true
+      isActive: true,
+      createUser:{
+        userName: '',
+        email:'',
+        passWord:''
+      },
+      connectUser:{
+        userName:'',
+        passWord:''
+      }
     }
   },
   methods:{
@@ -110,8 +122,24 @@ export default {
         console.log('Connexion ');
       } 
     },
+    signUp(){
+      createUserWithEmailAndPassword(auth, this.createUser.userName, this.createUser.passWord)
+      .then( async (response) =>{
+        const user = response.user
+        console.log('User Created ', user, 'infos user ', user.displayName);
+        this.showModalSignUp = false,
+        this.$router.push('/components/view/profile/userProfile')
+        // window.location.href = '/components/view/profile/userProfile'
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('erreur ', errorCode, errorMessage);
+      });
+      }
+    }
   }
-}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -124,25 +152,21 @@ export default {
     padding: 20px;
     z-index: 9999;
     box-shadow: 0 0 10px #212121e0, 100px 100px 100px 9000em rgb(48 47 47 / 74%);
-    opacity: 0;
+    transform: translateY(-150%);
     animation-name: appear;
     animation-duration: .5s;
-    animation-timing-function: cubic-bezier(0.45, 0.04, 0.69, 1.15);
+    /* animation-timing-function: cubic-bezier(0.45, 0.04, 0.69, 1.15); */
     animation-delay: .1s;
     animation-duration: alternate;
     animation-fill-mode: forwards;
-    transition: ease-out 3s;
+    transition: transform ease-out 3s;
   }
 
   @keyframes appear {
     0%{
       transform: translate(150%, -90%);
-      /* opacity: .5;  */
-      /* transform: scale(0); */
     }
     100%{
-      opacity: 1;
-      /* transform: scale(1); */
       transform: translate(150%, 10%);
     }
   }

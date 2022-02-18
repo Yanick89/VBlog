@@ -29,8 +29,8 @@ export default {
 
 <style scoped>
   .content{
-    width: 75%;
-    margin: 30px 0;
+    /* width: 75%; */
+    margin: 30px 100px;
   }
   h2{
     flex: 1;

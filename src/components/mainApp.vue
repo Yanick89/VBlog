@@ -1,19 +1,22 @@
 <template>
- <div class="main-contenair-home">
-   <div class="main-contenair">
-     <!-- <navBarLeft /> -->
-     <container ref="mainContenair"/>
-   </div>
+  <div>
+    <!-- <router-view/> -->
+    <navBar ref="navBar"/>
+    <div class="main-contenair-home">
+      <div class="main-contenair">
+      <container ref="mainContenair"/>
+      </div>
+    </div>
  </div>
 </template>
 
 <script>
-// import navBarLeft from './view/navBarLeft'
+import navBar from './view/navBar'
 import container from '../components/view/contenair'
 export default {
-  name: 'main',
+  name: 'mainApp',
   components:{
-    // navBarLeft,
+    navBar,
     container
   },
   data () {
@@ -28,13 +31,14 @@ export default {
 <style scoped>
   .main-contenair-home{
     margin-top: 5%;
+    padding: 3% 0;
     background: rgb(231 220 158 / 32%);
     color: #fff;
-    min-height: 100vh;
+    /* min-height: 100vh; */
   }
-  .main-contenair{
+  /* .main-contenair{
     display: flex !important;
     justify-content: space-between;
-    margin: 10px 100px;
-  }
+    margin: 10px 0;
+  } */
 </style>
