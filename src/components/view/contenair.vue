@@ -1,16 +1,68 @@
 <template>
-  <div class="content">
-    <div class="section1">
-      <h2>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit Quisquam.
-      </h2>
-      <div class="section-card">
-        <div class="card">
-          <div class="body-card">
+  <div>
+    <div class="content">
+      <div class="section1">
+        <h2>
+          Découvre une nouvelle expérience dans l'écriture. <span> ✍️</span> 
+        </h2>
+        <div class="section-card">
+          <div class="card">
+            <div class="body-card">
 
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="section2">
+      <div class="img-content"></div>
+      <div class="description-left">
+        <div class="tag-description">
+          <span>📚</span>
+          <h3>Apprend</h3>
+          <div class="description">
+            Lorem ipsum dolor sit amet consectetur, 
+            adipisicing elit. Eligendi, pariatur dolores? 
+            Modi explicabo unde iste repellendus dicta suscipit
+          </div>
+        </div>
+        <div class="tag-description">
+          <span>👐</span>
+          <h3>Partage ta passion</h3>
+          <div class="description">
+            Lorem ipsum dolor sit amet consectetur, 
+            adipisicing elit. Eligendi, pariatur dolores? 
+            Modi explicabo unde iste repellendus dicta suscipit
+          </div>
+        </div>
+        <div class="tag-description">
+          <span>🕵️‍♂️</span>
+          <h3>Explore</h3>
+          <div class="description">
+            Lorem ipsum dolor sit amet consectetur, 
+            adipisicing elit. Eligendi, pariatur dolores? 
+            Modi explicabo unde iste repellendus dicta suscipit
+          </div>
+        </div>
+        <div class="tag-description">
+          <span>✋ </span>
+          <h3>Participe</h3>
+          <div class="description">
+            Lorem ipsum dolor sit amet consectetur, 
+            adipisicing elit. Eligendi, pariatur dolores? 
+            Modi explicabo unde iste repellendus dicta suscipit
+          </div>
+        </div>
+        <div class="tag-description">
+          <span>💬</span>
+          <h3>Ose avec tes idées</h3>
+          <div class="description">
+            Lorem ipsum dolor sit amet consectetur, 
+            adipisicing elit. Eligendi, pariatur dolores? 
+            Modi explicabo unde iste repellendus dicta suscipit
+          </div>
+        </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -26,23 +78,24 @@ export default {
 
 }
 </script>
-
 <style scoped>
   .content{
-    /* width: 75%; */
-    margin: 30px 100px;
+    background: #663399;
+    padding: 50px 100px;
   }
   h2{
     flex: 1;
-    color: #000;
-    text-align: center;
+    /* text-align: center; */
     margin: 0 10px;
     font-size: 2.6rem;
+    color: #f1f1f1;
   }
  
   .section1{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
   }
   .section-card{
     display: flex;
@@ -57,9 +110,36 @@ export default {
   }
   .body-card{
     height: inherit;
-    /* width: 300px; */
     background: rgba(238, 133, 92, 0.945);
     border-radius: 15px;
   }
-
+  .section2{
+    display: flex;
+    flex-wrap: wrap;  
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 100px;
+    color: #221f14;
+  }
+  .section2 .img-content{
+    flex: 3;
+  }
+  .section2 .description-left{
+    flex: 2;
+  }
+  .section2 .description-left .description{
+    line-height: 1.6;
+    font-size: 18px;
+    color: #221f14c7;
+  }
+  .section2 .description-left .tag-description{
+    padding: 10px 0;
+  }
+  .section2 .description-left .tag-description h3{
+    padding: 12px 0;
+    font-size: 21px;
+  }
+  .section2 .description-left .tag-description span{
+    font-size: 1.6rem;
+  }
 </style>

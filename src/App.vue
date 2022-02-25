@@ -1,20 +1,14 @@
 <template>
   <div id="app">
     <div class="container">
-      <!-- <mainApp ref="mainApp"/> -->
       <router-view/>
     </div>
   </div>
 </template>
 
 <script>
-// import navBar from './components/view/navBar';
-// import mainApp from './components/mainApp'
 export default {
-  name: 'App',
-  // components:{
-  //   mainApp
-  // }
+  name: 'App', 
 }
 </script>
 
@@ -27,8 +21,10 @@ export default {
 }
 #app {
   font-family: 'Nunito Sans', sans-serif;
-  /* text-align: center; */
   color: #2c3e50;
-  /* height: 100vh; */
+  background: rgb(231 220 158 / 40%);
+}
+html{
+  scroll-behavior: smooth;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <router-view/> -->
     <navBar ref="navBar"/>
     <div class="main-contenair-home">
       <div class="main-contenair">
@@ -30,15 +29,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .main-contenair-home{
-    margin-top: 5%;
     padding: 3% 0;
-    background: rgb(231 220 158 / 32%);
     color: #fff;
-    /* min-height: 100vh; */
   }
-  /* .main-contenair{
-    display: flex !important;
-    justify-content: space-between;
-    margin: 10px 0;
-  } */
 </style>

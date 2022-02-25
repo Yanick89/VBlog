@@ -23,11 +23,15 @@
           <form action="">
             <label for="name">
               Nom:
-              <input type="text" v-model="createUser.name" id="name" placeholder="nom">
+              <input type="text" v-model="createUser.firstName" id="name" placeholder="Nom">
+            </label>
+            <label for="subname">
+              Prénom:
+              <input type="text" v-model="createUser.surName" id="subname" placeholder="Prénom">
             </label>
             <label for="mail">
               Email:
-              <input type="email" v-model="createUser.userName" id="mail" placeholder="mouzx@y.com">
+              <input type="email" v-model="createUser.email" id="mail" placeholder="mouzx@y.com">
             </label>
             <label for="password">
               Mot de passe:
@@ -66,7 +70,7 @@
           <form action="">
             <label for="mail">
               Email:
-              <input type="email" v-model="connectUser.userName" id="mail" placeholder="mouzx@y.com">
+              <input type="email" v-model="connectUser.email" id="mail" placeholder="mouzx@y.com">
             </label>
             <label for="password">
               Mot de passe:
@@ -82,27 +86,31 @@
         </div>
       </div>
     </div>
+    <!-- <loader ref="loader" /> -->
   </div>
 </template>
 
 <script>
+// import loader from '../loader'
 import firbase from '../../firebase';
 import {auth, db} from '../../firebase';
-import {createUserWithEmailAndPassword } from "firebase/auth";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
 export default {
   name: 'logUser',
+  // components:{loader},
   data () {
     return {
       showModalSignUp: false,
       showModalSignIn: false,
       isActive: true,
       createUser:{
-        userName: '',
+        firstName: '',
+        surName: '',
         email:'',
         passWord:''
       },
       connectUser:{
-        userName:'',
+        email:'',
         passWord:''
       }
     }
@@ -123,13 +131,13 @@ export default {
       } 
     },
     signUp(){
-      createUserWithEmailAndPassword(auth, this.createUser.userName, this.createUser.passWord)
+      createUserWithEmailAndPassword(auth, this.createUser.email, this.createUser.passWord)
       .then( async (response) =>{
         const user = response.user
         console.log('User Created ', user, 'infos user ', user.displayName);
-        this.showModalSignUp = false,
+        // this.showModalSignUp = false,
         this.$router.push('/components/view/profile/userProfile')
-        // window.location.href = '/components/view/profile/userProfile'
+        this.showModalSignUp = false
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -154,12 +162,11 @@ export default {
     box-shadow: 0 0 10px #212121e0, 100px 100px 100px 9000em rgb(48 47 47 / 74%);
     transform: translateY(-150%);
     animation-name: appear;
-    animation-duration: .5s;
-    /* animation-timing-function: cubic-bezier(0.45, 0.04, 0.69, 1.15); */
+    animation-duration: .3s;
     animation-delay: .1s;
     animation-duration: alternate;
     animation-fill-mode: forwards;
-    transition: transform ease-out 3s;
+    /* transition: transform ease-out 3s; */
   }
 
   @keyframes appear {
