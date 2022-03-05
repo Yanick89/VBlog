@@ -21,7 +21,7 @@
       </div>
       <div class="user-tab">
         <div class="btn-content">
-          <button v-for="tab in tabs" :key="tab" @click.prevent="setCurrentComponent(tab.component)" class="btn-tabs" :class="{'active' : isActive}">
+          <button v-for="(tab, index) in tabs" :key="index" @click.prevent="setCurrentComponent(tab.component, index)" class="btn-tabs" :class="{'active' : isActive === index}">
           {{tab.name}}
         </button>
         </div>       
@@ -53,13 +53,13 @@
         tabs:[{name:'A Propos de moi', component:'aboutUser'},
         {name:'Mes Articles', component:'myArticles'}],
         currentComponent: "aboutUser",
-        isActive: false,
+        isActive: 0,
       }
     },
     methods:{
-      setCurrentComponent(component) {
+      setCurrentComponent(component, index) {
         this.currentComponent = component
-        this.isActive = true
+        this.isActive = index
       },
     }
   }
@@ -68,13 +68,13 @@
 <style scoped>
   .user{
     position: relative;
+    background: #f8f8f8;
   }
   
   /* partie du conténu user-infos */
   .items-section{
     display: flex;
     align-items: start;
-    /* align-items: baseline; */
     margin: 2% 10%;
   }
   .items-section .user-infos {

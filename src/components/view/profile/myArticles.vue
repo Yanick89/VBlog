@@ -3,15 +3,13 @@
     <div v-for="(article, index) in articles" :key="index" class="container-article">
       <div>
         <div class="infos">
-          <!-- <img :src="article.imgProfile" alt=""> -->
-          <!-- <h4>{{ article.nameWritten}} </h4> -->
-          <span> il y a {{article.date}} </span>
+          <span> Il y a {{article.date}} </span>
         </div>
         <div class="display-description">
           <h3>{{ article.titleArticle}}</h3>
           <div class="discription">
             <p> {{ article.description}} </p>
-          <img :src="article.imgArticle" alt="">
+            <img :src="article.imgArticle" alt="photo de l'article">
           </div>
           
         </div>
@@ -76,6 +74,7 @@ export default {
   .infos img{
     height: 50px;
     width: 50px;
+    border-radius: 10px;
   }
   .infos h4{
     margin: 0 6px;
@@ -90,5 +89,6 @@ export default {
   .discription img{
     height: 100px;
     width: 100px;
+    border-radius: 10px;
   }
 </style>
