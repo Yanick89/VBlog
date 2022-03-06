@@ -1,18 +1,29 @@
 <template>
   <div class="cover-section">
-    <button @click="showBanner()" :class="{activePosition}">Ajouter un arrière plan</button>
-    <div v-if="addBlock" :style="defaultBanner" class="cover-default">
+    <button @click="showBanner()" :class="{activePosition}">
+      <span v-if="changeBtn">📷Ajouter un arrière plan</span>
+      <span v-else @click="changeCover()">
+        📷 Changer l'arrière plan
+        <chooseCover ref="chooseCover"/>
+      </span>
+    </button>
+    <div v-if="addCover" :style="defaultBanner" class="cover-default">
     </div>
   </div>
 </template>
 
 <script>
+import chooseCover from './chooseCover'
 export default {
   name: 'bannerCover',
+  components:{
+    chooseCover
+  },
   data(){
     return{
-      addBlock: false,
+      addCover: false,
       activePosition: false,
+      changeBtn: true,
       defaultBanner:{
         width: '100%',
         height:'180px',
@@ -25,8 +36,14 @@ export default {
   },
   methods:{
     showBanner(){
-      this.addBlock = true;
+      if(this.changeBtn = true){
+        this.changeBtn = false
+      }
+      this.addCover = true;
       this.activePosition = true
+    },
+    changeCover(){
+      console.log('new cover');
     }
   }
 }
@@ -37,30 +54,39 @@ export default {
     position: relative;
     padding-top: 60px;
     padding-bottom: 20px;
-    transition: all 1s ease-out;
+    transition: all .6s ease-out;
    }
   .cover-section button{
     opacity: 0;
-    padding: 2px 5px;
+    padding: 0;
     position: absolute;
     transform: translateY(15px);
   }
+  .cover-section button span{
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+  }
+  .cover-section button span:last-child{
+    position: relative;
+  }
+
   .cover-section:hover button{
     opacity: 1;
     position: absolute;
     transform: translateY(15px);
     right: 25%;
-    padding: 2px 5px;
     border: none;
     outline: none;
     font-weight: 600;
     border-radius: 2px;
     cursor: pointer;
     background: #f8f8f8;
-  }
-  
+    box-shadow: 1px 2px 3px #ccc;
+  } 
   .cover-section button.activePosition{
     right: 4%;
     bottom: 44px;
+    box-shadow: 0 0 0;
   }
 </style>

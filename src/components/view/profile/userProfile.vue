@@ -21,9 +21,9 @@
       </div>
       <div class="user-tab">
         <div class="btn-content">
-          <button v-for="(tab, index) in tabs" :key="index" @click.prevent="setCurrentComponent(tab.component, index)" class="btn-tabs" :class="{'active' : isActive === index}">
-          {{tab.name}}
-        </button>
+          <button v-for="(tab, index) in tabs" :key="index" @click.prevent="setCurrentComponent(tab.      component, index)" class="btn-tabs" :class="{'active' : isActive === index}">
+            {{tab.name}}
+          </button>
         </div>       
         <keep-alive>
           <component :is="currentComponent" />
@@ -87,13 +87,16 @@
     position: relative;
     width: 290px;
     height: 290px;
-    background: olivedrab;
+    background: rgba(238, 133, 92, 0.945);
     border-radius: 32px;
   }
   .items-section .user-infos ul{
     list-style: none;
     margin: 10px 20px;
     font-size: 1.2rem;
+  }
+  .items-section .user-infos ul li{
+    line-height: 1.5;
   }
   .items-section .user-tab ul{
     list-style: none;
@@ -116,6 +119,10 @@
     display: flex;
     justify-content: first baseline;
     margin-bottom: 10%;
+    position: relative;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgb(173 173 173 / 30%);
+    z-index: 1;
   }
   .btn-content button{
     padding: 8px 15px;
@@ -123,5 +130,24 @@
     outline: none;
     border: none;
     cursor: pointer;
+    background: transparent;
+  }
+  .btn-content button:hover{
+    /* background: red; */
+    /* transition: all ease-in-out .3s; */
+    transform-origin: center;
+  }
+  .btn-content button.active{
+    position: relative;
+  }
+  .btn-content button.active::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    transform: translate(-15px, 10px);
+    background: #663399;
+    /* transition: cubic-bezier(0.075, 0.82, 0.165, 1), 1s; */
   }
 </style>
