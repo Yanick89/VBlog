@@ -29,7 +29,7 @@ export default {
           nameWritten: 'Yanick',
           date:'4 jours',
           titleArticle:"l'Etat Ukranien à l'heure actuelle",
-          description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis perspiciatis modi, nobis eaque eius ratione reprehenderit porro beatae minima',
+          description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis perspiciatis modi, nobis eaque eius ratione reprehenderit porro beatae minima...',
           imgArticle:'https://miro.medium.com/max/1080/1*u1W_-zNpbacMyrtQcvlV2w.png'
         },
         {

@@ -28,7 +28,7 @@ export default {
       return{
         tabCover:{
           color:['red', 'yellow', 'orange', 'olivedrab', 'orangered', 'orchid', 'midnightblue', 'mediumvioletred', 'firebrick'],
-          img:['https://pbs.twimg.com/media/C-41JbmXcAAR4ia.jpg',
+          img:[
            'https://www.adawall.com.tr/resimler/800/Product-Variations/1002-7_S_.jpg',
            'https://www.knowdys.com/wp-content/uploads/2021/05/this-startup-pays-young-people-in-africa-to-learn-to-code-and-connects-them-with-fortune-500-companies.jpg',
            'https://wallpapercave.com/wp/wp3561159.jpg',
@@ -56,9 +56,27 @@ export default {
 </script>
 
 <style scoped>
+  .cover-picker{
+    height: 350px;
+    overflow: hidden;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+  .cover-picker::-webkit-scrollbar{
+    width: 10px;
+  }
+  .cover-picker::-webkit-scrollbar-thumb{
+    background: rgba(44, 62, 80, 0.445);
+    border-radius: 5px;
+  }
+  .cover-picker::-webkit-scrollbar-track{
+    background: #ddd;
+    border-radius: 5px;
+  }
   .cover-picker ul{
     list-style: none;
     display: grid;
+    background: #fff;
     grid-template-columns: repeat(3, 1fr);
   }
    .cover-picker ul li{

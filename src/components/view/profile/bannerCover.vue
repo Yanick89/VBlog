@@ -2,11 +2,15 @@
   <div class="cover-section">
     <button @click="showBanner()" :class="{activePosition}">
       <span v-if="changeBtn">📷Ajouter un arrière plan</span>
-      <span v-else @click="changeCover()">
+      <span v-else @click="modalCover = true">
         📷 Changer l'arrière plan
-        <chooseCover ref="chooseCover"/>
+        <!-- =======* choose cover component *=======-->
+        <!-- <chooseCover :modalCover="modalCover" ref="chooseCover"/> -->
       </span>
     </button>
+    <span>
+        <chooseCover :modalCover="modalCover" ref="chooseCover"/>
+      </span>
     <div v-if="addCover" :style="defaultBanner" class="cover-default">
     </div>
   </div>
@@ -31,7 +35,8 @@ export default {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center'
-      }
+      },
+      modalCover: false
     }
   },
   methods:{
@@ -41,9 +46,6 @@ export default {
       }
       this.addCover = true;
       this.activePosition = true
-    },
-    changeCover(){
-      console.log('new cover');
     }
   }
 }
@@ -55,6 +57,7 @@ export default {
     padding-top: 60px;
     padding-bottom: 20px;
     transition: all .6s ease-out;
+    z-index: 100;
    }
   .cover-section button{
     opacity: 0;
@@ -69,6 +72,7 @@ export default {
   }
   .cover-section button span:last-child{
     position: relative;
+    z-index: 300;
   }
 
   .cover-section:hover button{
@@ -88,5 +92,8 @@ export default {
     right: 4%;
     bottom: 44px;
     box-shadow: 0 0 0;
+  }
+  .content-modal{
+    position: absolute;
   }
 </style>

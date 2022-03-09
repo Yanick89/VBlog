@@ -2,24 +2,20 @@
   <div class="about-write">
    <div class="show-comment" v-if="showComment">
      <div class="paragraph">
-       <p>
-       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolorum similique 
-       atque laudantium quia illum aspernatur quae ducimus, quidem sunt enim esse fugit sit sapiente 
-       reiciendis deleniti ipsum. Iure, sunt. quidem sunt enim esse fugit sit sapiente 
-       reiciendis deleniti ipsum. Iure, sunt.
-     </p>
+       <h3> {{ comment.title }} </h3>
+       <p> {{ comment.text }} </p>
      </div>
      <div class="show-btn-write">
-       <button @click="openComment()"> Add </button>
+       <button @click="openComment()">➕</button>
      </div>
    </div>
    <transition name="fade">
     <div v-if="showWriten" class="write-comment">
       <form>
-        <textarea v-model="comment" cols="4" rows="5" maxlength="280" placeholder="Parle de toi..."></textarea>
+        <textarea v-model="writting" cols="4" rows="5" maxlength="280" placeholder="Mini description de toi..."></textarea>
         <div class="footer-btn">
           <button @click="closeComment">Annuler</button>
-          <button>Enregistrer</button>
+          <button @click="save">Enregistrer</button>
         </div>
       </form>
     </div>
@@ -32,7 +28,11 @@ export default {
   name: 'aboutUser',
   data(){
     return{
-      comment: '',
+      comment:{ 
+        title: 'Biographie',
+        text: " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolorum similique atque laudantium quia illum aspernatur quae ducimus, quidem sunt enim esse fugit sit sapiente reiciendis deleniti ipsum. Iure, sunt. quidem sunt enim esse fugit sit sapiente reiciendis deleniti ipsum. Iure, sunt."
+      },
+      writting: '',
       showWriten: false,
       showComment: true
     }
@@ -47,6 +47,13 @@ export default {
     closeComment(){
       this.showComment= true;
       this.showWriten = false
+    },
+    save(){
+      this.comment.text = this.writting;
+      this.showWriten = false;
+      this.showComment = true;
+      this.writting = ''
+      console.log('commentaire ', this.writting);
     }
   },
 }
@@ -60,6 +67,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .about-write .show-comment h3{
+    text-align: center;
+    margin: 8px 0;
   }
   .about-write .show-comment p{
     line-height: 1.5;
@@ -79,10 +90,12 @@ export default {
     padding: 10px;
     border: 1px solid #ccc;
     outline: none;
-    background: transparent;
+    /* background: transparent; */
+    background: #fff;
     cursor: pointer;
     margin-left: 20px;
     color: #ccc;
+    border-radius: 50%;
   }
   .about-write .write-comment form{
     display: flex;

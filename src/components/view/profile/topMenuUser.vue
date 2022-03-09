@@ -58,6 +58,7 @@ export default {
     padding: 10px;
     z-index: 5;
     backdrop-filter: blur(30px);
+    background: #fff;
   }
   nav span:first-child{
     display: flex;
