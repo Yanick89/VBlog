@@ -3,7 +3,6 @@
  * * Création de la fonction de la directi🇻🇪 
  * ! Mise en exportation de la function vers le main.js
  * ? Construction de la directive 
- * TODO: 
  */
 
 export default {   
@@ -11,8 +10,7 @@ export default {
         window.event = function (event){
             if (!(el == event.target || el.contains(event.target))){
                 vnode.context[binding.expression](event);
-                alert('alert')
-                // console.log('new ',binding.value, binding.expression)
+                // alert('alert')
             }
         };
         document.body.addEventListener('click', window.event)

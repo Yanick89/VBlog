@@ -134,7 +134,10 @@
     cursor: pointer;
     background: transparent;
   }
-
+  .btn-content button:hover{
+    color: gray;
+    transition: all ease-in-out .3s;
+  }
   .btn-content button.active{
     position: relative;
     color: rgb(102 51 153 / 80%);

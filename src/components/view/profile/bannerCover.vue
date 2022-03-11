@@ -2,26 +2,28 @@
   <div class="cover-section">
     <button @click="showBanner()" :class="{activePosition}">
       <span v-if="changeBtn">📷Ajouter un arrière plan</span>
-      <span v-else @click="open">
+      <span v-else @click="openDialog">
         📷 Changer l'arrière plan
       </span>
     </button>
     <div v-if="addCover" :style="defaultBanner" class="cover-default">
     </div>
      <!-- =======* choose cover component *=======-->
-    <div class="content-modal" >
-      <chooseCover  ref="chooseCover"/>
+    <div class="content-modal" v-outclick="openDialog">
+      <chooseCover :modalCover="modalCover" ref="chooseCover"/>
     </div>
   </div>
 </template>
 
 <script>
-import chooseCover from './chooseCover'
+import chooseCover from './chooseCover';
+import mixin from '../../../mixin'
 export default {
   name: 'bannerCover',
   components:{
     chooseCover
   },
+  mixins:[mixin],
   data(){
     return{
       addCover: false,
@@ -35,7 +37,7 @@ export default {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       },
-      // modalCover: false
+      modalCover: false
     }
   },
   methods:{
@@ -46,8 +48,11 @@ export default {
       this.addCover = true;
       this.activePosition = true
     },
-    open(){
-      this.$refs.chooseCover.modalCover = true
+    openDialog(){
+      // this.modalCover = true
+      alert('New Test')
+      this.$root.$emit('openDialog')
+      console.log('Open ', this.modalCover = true);
     }
   }
 }
