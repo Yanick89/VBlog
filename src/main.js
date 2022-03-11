@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ousideClick from './directive'
+import outclick from './directive'
 
 Vue.config.productionTip = false
-Vue.directive('ousideClick', ousideClick);
+Vue.directive('outclick', outclick);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  ousideClick,
   render: h => h(App)
 })

@@ -2,16 +2,15 @@
   <div class="cover-section">
     <button @click="showBanner()" :class="{activePosition}">
       <span v-if="changeBtn">📷Ajouter un arrière plan</span>
-      <span v-else @click="modalCover = true">
+      <span v-else @click="open">
         📷 Changer l'arrière plan
-        <!-- =======* choose cover component *=======-->
-        <!-- <chooseCover :modalCover="modalCover" ref="chooseCover"/> -->
       </span>
     </button>
-    <span>
-        <chooseCover :modalCover="modalCover" ref="chooseCover"/>
-      </span>
     <div v-if="addCover" :style="defaultBanner" class="cover-default">
+    </div>
+     <!-- =======* choose cover component *=======-->
+    <div class="content-modal" >
+      <chooseCover  ref="chooseCover"/>
     </div>
   </div>
 </template>
@@ -36,7 +35,7 @@ export default {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       },
-      modalCover: false
+      // modalCover: false
     }
   },
   methods:{
@@ -46,6 +45,9 @@ export default {
       }
       this.addCover = true;
       this.activePosition = true
+    },
+    open(){
+      this.$refs.chooseCover.modalCover = true
     }
   }
 }
@@ -94,6 +96,6 @@ export default {
     box-shadow: 0 0 0;
   }
   .content-modal{
-    position: absolute;
+    position: relative;
   }
 </style>

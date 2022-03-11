@@ -137,6 +137,7 @@
 
   .btn-content button.active{
     position: relative;
+    color: rgb(102 51 153 / 80%);
   }
   .btn-content button.active::before{
     content: '';
@@ -145,6 +146,7 @@
     height: 2px;
     width: 100%;
     transform: translate(-15px, 10px);
-    background: #663399;
+    background: rgb(102 51 153 / 80%);
+    /* background: #663399; */
   }
 </style>

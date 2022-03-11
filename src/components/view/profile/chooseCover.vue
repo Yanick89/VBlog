@@ -1,6 +1,6 @@
 <template>
-  <div v-if="modalCover" class="bg-link" v-ousideClick="hide">
-    <ul>
+  <div v-if="modalCover" class="bg-link" >
+    <ul v-outclick="hide">
         <li v-for="(link, index) in links" :key="index + 'lien'" @click="switchTab(link.component, index)" :class="{'active' : linkActive === index}">
             {{ link.name }}
         </li>
@@ -15,7 +15,7 @@
 import defaultChoose from './defaultChoose';
 import coverByLink from './coverByLink';
 import importCover from './importCover';
-import ousideClick from '../../../directive'
+// import ousideClick from '../../../directive'
 export default {
     name: 'chooseCover',
     components:{
@@ -23,14 +23,14 @@ export default {
         coverByLink,
         importCover
     },
-    props:{
-        modalCover:{
-            type: Boolean,
-            default(){
-                false
-            }
-        }
-    },
+    // props:{
+    //     modalCover:{
+    //         type: Boolean,
+    //         default(){
+    //             false
+    //         }
+    //     }
+    // },
     data (){
         return{
             links:[
@@ -40,6 +40,7 @@ export default {
             ],
             defaultComponent: 'defaultChoose',
             linkActive: 0,
+            modalCover: false
         }
     },
     methods:{
@@ -48,7 +49,8 @@ export default {
             this.linkActive = index
         },
         hide(){
-            alert('Réussi')
+            console.log('Réussi ',this.modalCover = false);
+            this.modalCover = false
         }
     }
 }
