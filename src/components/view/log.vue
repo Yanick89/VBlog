@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-content">
     <!-- Inscription -->
     <div v-if="showModalSignUp" :class="{isActive}">
       <div class="log">

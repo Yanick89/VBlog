@@ -7,15 +7,14 @@
 
 export default {   
     bind: function (el, binding, vnode){
-        window.event = function (event){
+        el.event = function (event){
             if (!(el == event.target || el.contains(event.target))){
                 vnode.context[binding.expression](event);
-                // alert('alert')
             }
         };
-        document.body.addEventListener('click', window.event)
+        document.body.addEventListener('click', el.event)
     },
     unbind(el) {
-        document.body.removeEventListener("click", window.event);
+        document.body.removeEventListener("click", el.event);
         },
 }

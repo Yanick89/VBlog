@@ -1,5 +1,5 @@
 <template>
-  <div v-if="modalCover" class="bg-link">
+  <div class="bg-link">
     <ul>
         <li v-for="(link, index) in links" :key="index + 'lien'" @click="switchTab(link.component, index)" :class="{'active' : linkActive === index}">
             {{ link.name }}
@@ -15,7 +15,6 @@
 import defaultChoose from './defaultChoose';
 import coverByLink from './coverByLink';
 import importCover from './importCover';
-// import ousideClick from '../../../directive'
 export default {
     name: 'chooseCover',
     components:{
@@ -48,7 +47,7 @@ export default {
             this.defaultComponent = component;
             this.linkActive = index
         },
-    }
+    },
 }
 </script>
 
@@ -57,7 +56,7 @@ export default {
         position: absolute;
         top: 0;
         right: 48px;
-        transform: translate(0, 235px);
+        transform: translate(0, -5px);
         background: #fff;
         width: 30%;
         border-radius: 5px;

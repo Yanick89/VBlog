@@ -2,15 +2,15 @@
   <div class="cover-section">
     <button @click="showBanner()" :class="{activePosition}">
       <span v-if="changeBtn">📷Ajouter un arrière plan</span>
-      <span v-else @click="openDialog">
+      <span v-else @click.stop="openDialog">
         📷 Changer l'arrière plan
       </span>
     </button>
     <div v-if="addCover" :style="defaultBanner" class="cover-default">
     </div>
      <!-- =======* choose cover component *=======-->
-    <div class="content-modal" v-outclick="openDialog">
-      <chooseCover :modalCover="modalCover" ref="chooseCover"/>
+    <div v-if="modalCover" class="content-modal" >
+      <chooseCover v-outclick:openDialog="closeDialog" :modalCover="modalCover" ref="chooseCover"/>
     </div>
   </div>
 </template>
@@ -48,13 +48,13 @@ export default {
       this.addCover = true;
       this.activePosition = true
     },
-    openDialog(){
-      // this.modalCover = true
-      alert('New Test')
-      this.$root.$emit('openDialog')
-      console.log('Open ', this.modalCover = true);
+    openDialog(value){
+      this.modalCover = true
+    }, 
+    closeDialog(){
+      this.modalCover = false
     }
-  }
+  },
 }
 </script>
 

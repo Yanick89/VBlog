@@ -15,7 +15,7 @@
         <textarea v-model="writting" cols="4" rows="5" maxlength="280" placeholder="Mini description de toi..."></textarea>
         <div class="footer-btn">
           <button @click="closeComment">Annuler</button>
-          <button @click="save">Enregistrer</button>
+          <button :class="{btnActive}" @click="save">Enregistrer</button>
         </div>
       </form>
     </div>
@@ -34,7 +34,8 @@ export default {
       },
       writting: '',
       showWriten: false,
-      showComment: true
+      showComment: true, 
+      btnActive : false
     }
   },
   methods:{
@@ -56,6 +57,11 @@ export default {
       console.log('commentaire ', this.writting);
     }
   },
+  mounted(){
+    if(this.writting.length == 1){
+      this.btnActive = true
+    }
+  }
 }
 </script>
 
@@ -127,11 +133,10 @@ export default {
     border: 1px solid #2c3e50;
   }
   .about-write .write-comment form .footer-btn button:last-child{
-    background: #663399;
+    background: #6633995d;
     margin-left: 5px;
     color: #f1f1f1;
     border: none;
   }
- 
 
 </style>

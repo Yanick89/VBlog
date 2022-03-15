@@ -1,12 +1,14 @@
-// Functions à Usage global
+// // Functions à Usage global
 
-export default{
-    created(){
-        this.$root.$on('openDialog', this.closeDialog)
-    },
-    methods:{
-        closeDialog(){
-            this.modalCover = false
-        }
-    }
-}
+// export default{
+//     created(){
+//         this.$root.$on('openDialog', this.closeDialog)
+//     },
+//     methods:{
+//         closeDialog(e){
+//             this.modalCover = false
+//                 console.log('couille');
+            
+//         }
+//     }
+// }
