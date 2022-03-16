@@ -46,10 +46,10 @@ export default {
     },
     methods:{
       colorPicker(picker){
-        console.log(picker);
+        this.$emit('colorPicker', picker)
       },
       imgPicker(picker){
-        console.log(picker);
+        this.$emit('imgPicker', picker)
       }
     }
 }

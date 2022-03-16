@@ -88,7 +88,6 @@
     width: 250px;
     height: 250px;
     background: rgba(238, 133, 92, 0.945);
-    /* border-radius: 32px; */
     border-radius: 50%;
   }
   .items-section .user-infos ul{
@@ -109,7 +108,7 @@
   .items-section .user-tab ul li{
    margin: 0 10px;
   }
-   .items-section .user-photo img{
+  .items-section .user-photo img{
     position: absolute;
     height: inherit;
     width: 100%;

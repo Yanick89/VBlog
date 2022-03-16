@@ -10,18 +10,24 @@
     </div>
      <!-- =======* choose cover component *=======-->
     <div v-if="modalCover" class="content-modal" >
-      <chooseCover v-outclick:openDialog="closeDialog" :modalCover="modalCover" ref="chooseCover"/>
+      <chooseCover
+       v-outclick:openDialog="closeDialog"
+       :modalCover="modalCover"
+       :defaultBanner="defaultBanner"
+        ref="chooseCover"/>
     </div>
   </div>
 </template>
 
 <script>
 import chooseCover from './chooseCover';
+import link from './coverByLink'
 import mixin from '../../../mixin'
 export default {
   name: 'bannerCover',
   components:{
-    chooseCover
+    chooseCover,
+    link
   },
   mixins:[mixin],
   data(){
@@ -41,6 +47,9 @@ export default {
     }
   },
   methods:{
+    changingColor(picker){
+      alert('color')
+    },
     showBanner(){
       if(this.changeBtn = true){
         this.changeBtn = false
@@ -64,7 +73,6 @@ export default {
     padding-top: 60px;
     padding-bottom: 20px;
     transition: all .6s ease-out;
-    z-index: 100;
    }
   .cover-section button{
     opacity: 0;
@@ -79,7 +87,7 @@ export default {
   }
   .cover-section button span:last-child{
     position: relative;
-    z-index: 300;
+    /* z-index: 300; */
   }
 
   .cover-section:hover button{
@@ -95,6 +103,16 @@ export default {
     background: #f8f8f8;
     box-shadow: 1px 2px 3px #ccc;
   } 
+  .cover-section button.activePosition{
+    right: 4%;
+    bottom: 44px;
+    box-shadow: 0 0 0;
+  }
+  .cover-section .cover-default{
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+  }
   .cover-section button.activePosition{
     right: 4%;
     bottom: 44px;

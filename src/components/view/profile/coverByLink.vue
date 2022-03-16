@@ -1,15 +1,26 @@
 <template>
   <div>
       <form>
-          <input type="text" name="" placeholder="Colle un lien image">
-          <button>Envvoyer</button>
+          <input type="text" v-model="linkImg" name="" placeholder="Colle un lien image">
+          <button @click.prevent="sendImg">Envvoyer</button>
       </form>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'link'
+    name: 'link',
+    data(){
+        return{
+            linkImg: ''
+        }
+    },
+    methods:{
+        sendImg(){
+            this.$emit('sendImg', this.linkImg)
+            this.linkImg = ''
+        }
+    }
 }
 </script>
 
@@ -23,12 +34,12 @@ export default {
     }
     form input{
         width: 90%;
-        padding: 3px 15px;
+        padding: 4px 15px;
         font-size: .8rem;
         outline: none;
         font-weight: 600;
         border-radius: 3px;
-        border: 1px solid #221f14;
+        border: 1px solid rgb(44 62 80 / 60%);
     }
     form input::placeholder{
         font-weight: 400;

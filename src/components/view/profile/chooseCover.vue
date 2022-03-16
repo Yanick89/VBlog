@@ -6,7 +6,11 @@
         </li>
     </ul>
     <keep-alive>
-        <component :is="defaultComponent" />
+        <component 
+        @colorPicker="changeColor"
+        @imgPicker="changeImg"
+        @sendImg="changeByLink"
+        :is="defaultComponent" />
     </keep-alive>
   </div>
 </template>
@@ -28,7 +32,14 @@ export default {
             default(){
                 false
             }
-        }
+        },
+        defaultBanner:{
+            type: Object,
+            default(){
+                {}
+            }
+        },
+        
     },
     data (){
         return{
@@ -38,8 +49,7 @@ export default {
                 {name: 'Lien', component:'coverByLink'}
             ],
             defaultComponent: 'defaultChoose',
-            linkActive: 0,
-            // modalCover: false
+            linkActive: 0
         }
     },
     methods:{
@@ -47,6 +57,17 @@ export default {
             this.defaultComponent = component;
             this.linkActive = index
         },
+        changeColor(picker){
+            this.defaultBanner.background = picker
+        },
+        changeImg(img){
+            this.defaultBanner.background = `url('${img}')`
+        },
+        changeByLink(imgByLink){
+            this.defaultBanner.background = `url('${imgByLink}')`
+            console.log('change img by link', imgByLink);
+        },
+        
     },
 }
 </script>
