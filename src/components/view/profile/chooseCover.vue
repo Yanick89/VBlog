@@ -10,6 +10,7 @@
         @colorPicker="changeColor"
         @imgPicker="changeImg"
         @sendImg="changeByLink"
+        @sendingImg="changeUpload"
         :is="defaultComponent" />
     </keep-alive>
   </div>
@@ -38,8 +39,7 @@ export default {
             default(){
                 {}
             }
-        },
-        
+        }       
     },
     data (){
         return{
@@ -65,9 +65,11 @@ export default {
         },
         changeByLink(imgByLink){
             this.defaultBanner.background = `url('${imgByLink}')`
-            console.log('change img by link', imgByLink);
         },
-        
+        changeUpload(uploadImg){
+            this.defaultBanner.background = `url('${uploadImg}')`
+           console.log('reussi ', uploadImg);
+        }
     },
 }
 </script>
@@ -77,7 +79,7 @@ export default {
         position: absolute;
         top: 0;
         right: 48px;
-        transform: translate(0, -5px);
+        transform: translate(0, -35px);
         background: #fff;
         width: 30%;
         border-radius: 5px;
@@ -93,11 +95,11 @@ export default {
         cursor: pointer;
     }
     ul li:hover{
-        color: #2c3e50;
+        color: var(--text-dark-tertiary);
         transition: all ease-in-out .2s;
     }
     ul li.active{
-        color: #2c3e50;
+        color: var(--text-dark-tertiary);
         transition: all ease .3s;
     }
 </style>

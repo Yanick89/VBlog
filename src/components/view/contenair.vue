@@ -80,7 +80,7 @@ export default {
 </script>
 <style scoped>
   .content{
-    background: #663399;
+    background: var( --background-purple-color);
     padding: 50px 100px;
   }
   h2{
@@ -110,7 +110,7 @@ export default {
   }
   .body-card{
     height: inherit;
-    background: rgba(238, 133, 92, 0.945);
+    background: var(--orange-color);
     border-radius: 15px;
   }
   .section2{
@@ -119,7 +119,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 50px 100px;
-    color: #221f14;
+    color: var( --text-dark-primary);
   }
   .section2 .img-content{
     flex: 3;
@@ -130,7 +130,7 @@ export default {
   .section2 .description-left .description{
     line-height: 1.6;
     font-size: 18px;
-    color: #221f14c7;
+    color: var( --text-dark-primary-light);
   }
   .section2 .description-left .tag-description{
     padding: 10px 0;

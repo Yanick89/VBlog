@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <form>
     <!-- Inscription -->
     <div v-if="showModalSignUp" :class="{isActive}">
       <div class="log">
@@ -19,28 +20,26 @@
             </g>
           </svg>
         </button>
-        <div class="formulaire">
-          <form action="">
-            <label for="name">
-              Nom:
-              <input type="text" v-model="createUser.firstName" id="name" placeholder="Nom">
-            </label>
-            <label for="subname">
-              Prénom:
-              <input type="text" v-model="createUser.surName" id="subname" placeholder="Prénom">
-            </label>
-            <label for="mail">
-              Email:
-              <input type="email" v-model="createUser.email" id="mail" placeholder="mouzx@y.com">
-            </label>
-            <label for="password">
-              Mot de passe:
-              <input type="password" v-model="createUser.passWord" id="password" placeholder="mot de passe">
-            </label>
-            <div class="submit">
-              <button type="submit" @click="signUp()"> Enregister</button>
-            </div>
-          </form>
+        <div class="formulaire">         
+          <label for="name">
+            Nom:
+            <input type="text" v-model="createUser.firstName" id="name" placeholder="Nom">
+          </label>
+          <label for="subname">
+            Prénom:
+            <input type="text" v-model="createUser.surName" id="subname" placeholder="Prénom">
+          </label>
+          <label for="mail">
+            Email:
+            <input type="email" v-model="createUser.email" id="mail" placeholder="mouzx@y.com">
+          </label>
+          <label for="password">
+            Mot de passe:
+            <input type="password" v-model="createUser.passWord" id="password" placeholder="mot de passe">
+          </label>
+          <div class="submit">
+            <button type="submit" @click="signUp()"> Enregister</button>
+          </div>        
         </div>
         <div class="description">
           <p>Vous avez déjà un compte? <span @click="openLinks">Incrivez-vous</span></p>
@@ -66,26 +65,25 @@
             </g>
           </svg>
         </button>
-        <div class="formulaire">
-          <form action="">
-            <label for="mail">
-              Email:
-              <input type="email" v-model="connectUser.email" id="mail" placeholder="mouzx@y.com">
-            </label>
-            <label for="password">
-              Mot de passe:
-              <input type="password" v-model="connectUser.passWord" id="password" placeholder="mot de passe">
-            </label>
-            <div class="submit">
-              <button type="submit"> Connexion</button>
-            </div>
-          </form>
+        <div class="formulaire">         
+          <label for="mail">
+            Email:
+            <input type="email" v-model="connectUser.email" id="mail" placeholder="mouzx@y.com">
+          </label>
+          <label for="password">
+            Mot de passe:
+            <input type="password" v-model="connectUser.passWord" id="password" placeholder="mot de passe">
+          </label>
+          <div class="submit">
+            <button type="submit"> Connexion</button>
+          </div>         
         </div>
         <div class="description">
           <p>Vous n'avez pas de compte? <span @click="openLinkConnexion">Cliquez-vous ici</span></p>
         </div>
       </div>
     </div>
+    </form>
     <!-- <loader ref="loader" /> -->
   </div>
 </template>
@@ -117,7 +115,7 @@ export default {
   },
   methods:{
     openLinks(){
-      if(this.showModalSignUp = true){
+      if(this.showModalSignUpfalse){
         this.showModalSignUp = false,
         this.showModalSignIn = true        
         console.log('Inscription ');
@@ -135,7 +133,6 @@ export default {
       .then( async (response) =>{
         const user = response.user
         console.log('User Created ', user, 'infos user ', user.displayName);
-        // this.showModalSignUp = false,
         this.$router.push('/components/view/profile/userProfile')
         this.showModalSignUp = false
       })
@@ -152,21 +149,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+ 
   .isActive{
     position: fixed;  
     width: 350px;
-    background: rgb(255, 255, 255);
+    background: var(--background-white-primary);
     border-radius: 15px;
     padding: 20px;
-    z-index: 9999;
-    box-shadow: 0 0 10px #212121e0, 100px 100px 100px 9000em rgb(48 47 47 / 74%);
+    z-index: 20;
+    box-shadow: 0 0 10px var( --shadow-color-primary-light), 100px 100px 100px 9000em rgb(48 47 47 / 74%);
     transform: translateY(-150%);
     animation-name: appear;
     animation-duration: .3s;
     animation-delay: .1s;
     animation-duration: alternate;
     animation-fill-mode: forwards;
-    /* transition: transform ease-out 3s; */
   }
 
   @keyframes appear {
@@ -193,7 +190,7 @@ export default {
     font-size: 16px;
     border-radius: 5px;
     outline: none;
-    background: #e6e6e6;
+    background: var(--background-input-purple-thin);
     border: none;
   }
   button{
@@ -214,8 +211,8 @@ export default {
     width: 32px;
   }
   .formulaire button{
-    background: #663399;
-    color: #fff;
+    background: var(--background-purple-color);
+    color: var( --text-white-primary);
     width: 100%;
     margin: 0 0 15px 0;
     padding: 10px 5px;
@@ -224,7 +221,7 @@ export default {
   .description span{
     font-size: 13px;
     font-weight: 700;
-    color: #663399;
+    color: var(--text-purple-color);
     cursor: pointer;
   }
 

@@ -56,9 +56,9 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    z-index: 5;
+    z-index: 100;
     backdrop-filter: blur(30px);
-    background: #fff;
+    background: var(--background-white-color);
   }
   nav span:first-child{
     display: flex;
@@ -75,9 +75,8 @@ export default {
     justify-content: space-evenly;
   }
    nav ul li:first-child{
-    /* background: #663399; */
-    background: hsla(270, 50%, 40%, 0.322);
-    padding: 5px 10px;
+    background: var(--background-btn-purple-light);
+    padding: 8px 10px;
     border-radius: 20px;
     color: #fff;
     margin-right: 8px;

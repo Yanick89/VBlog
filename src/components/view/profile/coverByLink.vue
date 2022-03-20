@@ -38,8 +38,8 @@ export default {
         font-size: .8rem;
         outline: none;
         font-weight: 600;
-        border-radius: 3px;
-        border: 1px solid rgb(44 62 80 / 60%);
+        border-radius: 10px;
+        border: 1px solid var(--border-dark-thin);
     }
     form input::placeholder{
         font-weight: 400;
@@ -49,10 +49,10 @@ export default {
         outline: none;
         margin: 5px 0;
         padding: 5px 20px;
-        border-radius: 3px;
+        border-radius: 10px;
         font-size: .9rem;
         font-weight: 700;
-        color: hsla(270, 50%, 40%, 100);
-        background: hsla(270, 50%, 40%, 0.322);
+        color: var( --text-purple-color);
+        background: var(--background-btn-purple-light);
     }
 </style>

@@ -12,9 +12,9 @@
    <transition name="fade">
     <div v-if="showWriten" class="write-comment">
       <form>
-        <textarea v-model="writting" cols="4" rows="5" maxlength="280" placeholder="Mini description de toi..."></textarea>
+        <textarea v-model="writting" cols="4" rows="5" maxlength="280" @keyup="colorBtn" placeholder="Mini description de toi..."></textarea>
         <div class="footer-btn">
-          <button @click="closeComment">Annuler</button>
+          <button @click.prevent="closeComment">Annuler</button>
           <button :class="{btnActive}" @click="save">Enregistrer</button>
         </div>
       </form>
@@ -35,7 +35,7 @@ export default {
       writting: '',
       showWriten: false,
       showComment: true, 
-      btnActive : false
+      btnActive : false,
     }
   },
   methods:{
@@ -54,12 +54,13 @@ export default {
       this.showWriten = false;
       this.showComment = true;
       this.writting = ''
-      console.log('commentaire ', this.writting);
-    }
-  },
-  mounted(){
-    if(this.writting.length == 1){
-      this.btnActive = true
+    },
+      colorBtn(){
+      if(this.writting.length > 0){
+        this.btnActive = true
+      } else{
+        this.btnActive = false
+      }
     }
   }
 }
@@ -83,6 +84,7 @@ export default {
     word-spacing: 7.5px;
     font-size: 1.3rem;
     text-align: justify;
+    text-transform: capitalize;
   }
   .about-write .write-comment{
     margin: 30px 0;
@@ -128,15 +130,18 @@ export default {
     outline: none;
     border: none;
     background: #fff;
-    color: #2c3e50;
+    color: var(--text-dark-secondary);
     cursor: pointer;
-    border: 1px solid #2c3e50;
+    border: 1px solid var(--border-dark-thin);
   }
   .about-write .write-comment form .footer-btn button:last-child{
-    background: #6633995d;
+    background: var(--background-btn-dark-light);
     margin-left: 5px;
     color: #f1f1f1;
     border: none;
+  }
+  .about-write .write-comment form .footer-btn button.btnActive{
+    background: var(--background-btn-dark);
   }
 
 </style>

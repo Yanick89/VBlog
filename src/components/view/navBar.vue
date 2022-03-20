@@ -50,10 +50,6 @@
       userAvatar,
       logUser
     },
-    // data () {
-    //   return {
-    //   }
-    // },
     methods:{
       openSignUp(){
         this.$refs.logUser.showModalSignUp = true
@@ -77,7 +73,7 @@
     width: 100%;
     top: 0;
     left: 0;
-    background: #663399;
+    background: var(--background-purple-color);
     color: #fff;
     padding: 15px 100px;
   }
@@ -98,9 +94,9 @@
     margin: 0 10px;
   }
   nav ul li:nth-child(2){
-    padding: 5px 10px;
+    padding: 8px 10px;
     border-radius: 20px;
-    color: #663399;
+    color: var(--text-purple-color);
     background: #fff;
   }
  

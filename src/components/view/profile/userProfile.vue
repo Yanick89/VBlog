@@ -66,10 +66,10 @@
 </script>
 
 <style scoped>
-  .user{
+  /* .user{
     position: relative;
     background: #f8f8f8;
-  }
+  } */
   
   /* partie du conténu user-infos */
   .items-section{
@@ -87,7 +87,7 @@
     position: relative;
     width: 250px;
     height: 250px;
-    background: rgba(238, 133, 92, 0.945);
+    background: var(--orange-color);
     border-radius: 50%;
   }
   .items-section .user-infos ul{
@@ -122,7 +122,7 @@
     margin-bottom: 10%;
     position: relative;
     padding-bottom: 8px;
-    border-bottom: 2px solid rgb(173 173 173 / 30%);
+    border-bottom: 2px solid var(--border-gray-thin);
     z-index: 1;
   }
   .btn-content button{
@@ -134,12 +134,12 @@
     background: transparent;
   }
   .btn-content button:hover{
-    color: gray;
+    color: var(--hover-link-gray);
     transition: all ease-in-out .3s;
   }
   .btn-content button.active{
     position: relative;
-    color: rgb(102 51 153 / 80%);
+    color: var( --active-color-purple);
   }
   .btn-content button.active::before{
     content: '';
@@ -148,7 +148,6 @@
     height: 2px;
     width: 100%;
     transform: translate(-15px, 10px);
-    background: rgb(102 51 153 / 80%);
-    /* background: #663399; */
+    background: var(--background-btn-purple-light);
   }
 </style>
