@@ -8,10 +8,15 @@
           <img :src="userInfos.profilPhoto" alt="profil photo">
         </div>
         <ul>
-          <li v-for="(infos, index) in userInfos" :key="index">
+          <li v-for="(infos, index) in userInfos.displayInfos" :key="index">
             <strong> {{ infos }} </strong>
           </li>
         </ul>
+        <button class="link-btn">
+          <router-link :to="{ name: 'profilEdite' }">
+            Editer le profile<span>✏️</span>
+          </router-link>
+        </button>
       </div>
       <div class="user-tab">
         <div class="btn-content">
@@ -46,9 +51,11 @@
       return{
         userInfos:{
           profilPhoto:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
-          name: 'MOUSSOUNDA',
-          firstName:'Yanick',
-          profession:'Dev Frontend'
+          displayInfos:{
+            name: 'MOUSSOUNDA',
+            firstName:'Yanick',
+            profession:'Dev Frontend'
+          }
         },
         tabs:[{name:'A Propos de moi', component:'aboutUser'},
         {name:'Mes Articles', component:'myArticles'}],
@@ -114,6 +121,25 @@
     width: 100%;
     object-fit: cover;
     border-radius: 50%
+  }
+  .items-section button.link-btn{
+    border: none;
+    outline: none;
+    background: transparent;
+    margin: 30px 20px;
+  }
+  .items-section button.link-btn a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;  
+    font-size: 1.2rem;
+    line-height: 1.5px;
+    color: var(--text-purple-color);
+    font-weight: 600;
+  }
+  .items-section button.link-btn a span{
+    margin-bottom: 10px;
+    font-size: 1.5rem;
   }
 
   .btn-content{

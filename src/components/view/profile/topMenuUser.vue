@@ -30,7 +30,11 @@
         </span>
       </span>
       <ul>
-        <li>Publier</li>
+        <li>
+          <router-link :to="{ name: 'writingArticle' }">
+            Ecrit ton postes
+          </router-link>
+        </li>
         <li> <userAvatar ref="user"/></li>
       </ul>
     </nav>
@@ -42,7 +46,7 @@ import userAvatar from '../userAvatar'
 export default {
     name: 'topMenuUser',
     components:{
-        userAvatar
+      userAvatar
     }
 }
 </script>
@@ -76,9 +80,12 @@ export default {
   }
    nav ul li:first-child{
     background: var(--background-btn-purple-light);
-    padding: 8px 10px;
+    padding: 8px 20px;
     border-radius: 20px;
-    color: #fff;
     margin-right: 8px;
+   }
+   nav ul li:first-child a{
+    color: var(--text-white-primary);
+    text-decoration: none;
    }
 </style>
