@@ -26,15 +26,15 @@
       </span>
       <ul>
         <li>
-          <router-link :to="{ name: 'userProfile' }">
+          <!-- <router-link :to="{ name: 'userProfile' }">
             home
-          </router-link>
+          </router-link> -->
         </li>
         <li @click="openSignUp">Inscription</li>
         <li @click="openSignIn">Connexion</li>
-        <li>
+        <!-- <li>
          <userAvatar ref="user"/>
-        </li>
+        </li> -->
       </ul>
     </nav>
     <logUser ref="logUser"/>

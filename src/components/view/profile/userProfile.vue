@@ -8,19 +8,14 @@
           <img :src="userInfos.profilPhoto" alt="profil photo">
         </div>
         <ul>
-          <li v-for="(infos, index) in userInfos.displayInfos" :key="index">
+          <li v-for="(infos, index) in userInfos.profileUser" :key="index">
             <strong> {{ infos }} </strong>
           </li>
         </ul>
-        <button class="link-btn">
-          <router-link :to="{ name: 'profilEdite' }">
-            Editer le profile<span>✏️</span>
-          </router-link>
-        </button>
       </div>
       <div class="user-tab">
         <div class="btn-content">
-          <button v-for="(tab, index) in tabs" :key="index" @click.prevent="setCurrentComponent(tab.      component, index)" class="btn-tabs" :class="{'active' : isActive === index}">
+          <button v-for="(tab, index) in tabs" :key="index" @click.prevent="setCurrentComponent(tab.component, index)" class="btn-tabs" :class="{'active' : isActive === index}">
             {{tab.name}}
           </button>
         </div>       
@@ -38,7 +33,9 @@
   import myArticles from './myArticles'
   import topMenuUser from './topMenuUser'
   import bannerCover from './bannerCover'
-
+  import { auth, db } from '../../../firebase'
+  import { collection, doc, getDoc } from "firebase/firestore"; 
+  import { onAuthStateChanged } from 'firebase/auth'
   export default {
     name: 'userProfile',
     components:{
@@ -51,9 +48,9 @@
       return{
         userInfos:{
           profilPhoto:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
-          displayInfos:{
+          profileUser:{
             name: 'MOUSSOUNDA',
-            firstName:'Yanick',
+            lastName:'Yanick',
             profession:'Dev Frontend'
           }
         },
@@ -68,16 +65,28 @@
         this.currentComponent = component
         this.isActive = index
       },
+      getUserData(){
+        onAuthStateChanged(auth,(user) =>{
+          if(user != null){
+            this.userInfos.profileUser = {
+            name: user.displayName,
+            // lastName:'Yanick',
+            // profession:'Dev Frontend'
+          }
+            console.log('Infos ', this.profileUser );
+          }
+        })
+      },
+
+    },
+    mounted(){
+      this.getUserData()
     }
   }
 </script>
 
 <style scoped>
-  /* .user{
-    position: relative;
-    background: #f8f8f8;
-  } */
-  
+
   /* partie du conténu user-infos */
   .items-section{
     display: flex;
@@ -122,21 +131,7 @@
     object-fit: cover;
     border-radius: 50%
   }
-  .items-section button.link-btn{
-    border: none;
-    outline: none;
-    background: transparent;
-    margin: 30px 20px;
-  }
-  .items-section button.link-btn a{
-    display: flex;
-    align-items: center;
-    text-decoration: none;  
-    font-size: 1.2rem;
-    line-height: 1.5px;
-    color: var(--text-purple-color);
-    font-weight: 600;
-  }
+ 
   .items-section button.link-btn a span{
     margin-bottom: 10px;
     font-size: 1.5rem;

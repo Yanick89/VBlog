@@ -4,7 +4,8 @@
       <div class="paragraph">
         <h3>{{ comment.title }}</h3>
         <div>
-          <img :src="urlImg" alt />
+          <!-- <img :src="urlImg" alt /> -->
+           <img :src="this.comment.urlImg" alt="">
         </div>
         <p>{{ comment.text }}</p>
       </div>
@@ -22,7 +23,9 @@
               <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v8l-2.083-2.083a.5.5 0 0 0-.76.063L8 11 5.835 9.7a.5.5 0 0 0-.611.076L3 12V2z"/>
             </svg>
           </label>
-          <input ref="img" type="file" name id="img" style="display: none" />
+          <input ref="aboutImg" type="file" multiple name id="img" style="display: none" @change="selectImg"/>
+          <img :src=" this.comment.urlImg " alt="">
+          <p> {{ this.comment.name  }} </p>
         </div>
         <form>
           <div class="text-emoji">
@@ -66,12 +69,13 @@ export default {
     return {
       comment: {
         urlImg:"",
+        name:'',
         title: "Biographie",
         text:
           " Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolorum similique atque laudantium quia illum aspernatur quae ducimus, quidem sunt enim esse fugit sit sapiente reiciendis deleniti ipsum. Iure, sunt. quidem sunt enim esse fugit sit sapiente reiciendis deleniti ipsum. Iure, sunt."
       },
       // writting: "Someting text ",
-      urlImg:  "https://topdata.news/wp-content/uploads/2020/12/Boruto-Chapitre-54.jpg",
+      // urlImg:  "https://topdata.news/wp-content/uploads/2020/12/Boruto-Chapitre-54.jpg",
       showDialog: false,
       writting: "",
       showWriten: false,
@@ -101,12 +105,22 @@ export default {
       this.showComment = true;
       this.showWriten = false;
     },
+    selectImg(){
+      const fileList = this.$refs.aboutImg.files
+      for(let e of fileList){
+        this.comment.urlImg = URL.createObjectURL(e)
+        this.urlImg = this.comment.urlImg
+        this.comment.name = e.name
+        console.log('image nom ', e.name);        
+      }
+    },
     save() {
+      // console.log('test ', this.selectImg);
+      this.selectImg();
       this.comment.text = this.writting;
       this.showWriten = false;
       this.showComment = true;
       this.writting = "";
-      console.log("get emoji ", this.writting);
     },
     colorBtn() {
       if (this.writting.length > 0) {
@@ -147,18 +161,21 @@ export default {
 }
 .about-write .write-comment .img-label{
   margin: 10px 0;
+  cursor: pointer;
 }
-/* .about-write .write-comment .img-label svg{
-  display: none;
-  opacity: 0;
-  transition: opacity .3s ease-in-out;
+.about-write .write-comment .img-label img{
+  width: 100%;
+  /* height: 375px;
+  object-fit: cover; */
+}
+.about-write .write-comment .img-label svg{
+  fill: rgba(55, 53, 47, 0);
+  transition: fill .3s ease-in-out;
 }
 .about-write .write-comment:hover svg{
-  display: block;
-  opacity: 1;
   fill: rgba(55, 53, 47, 0.35);
-  transition: .5s ease-in-out;
-} */
+  transition: .2s ease-in-out;
+}
 .about-write .show-comment .show-btn-write button {
   opacity: 0;
   transition: opacity, 0.2s;

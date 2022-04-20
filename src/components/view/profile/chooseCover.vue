@@ -7,11 +7,11 @@
     </ul>
     <keep-alive>
         <component 
-        @colorPicker="changeColor"
-        @imgPicker="changeImg"
-        @sendImg="changeByLink"
-        @sendingImg="changeUpload"
-        :is="defaultComponent" />
+            @colorPicker="changeColor"
+            @imgPicker="changeImg"
+            @sendImg="changeByLink"
+            @sendingImg="changeUpload"
+            :is="defaultComponent" />
     </keep-alive>
   </div>
 </template>
