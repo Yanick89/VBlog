@@ -23,11 +23,11 @@
           <path d="M226.84 16.8789L228.109 13.5H224.5H188.5H186.74L186.146 15.1571L126.406 181.969L66.9549 15.1607L66.363 13.5H64.6H28H24.3858L25.6607 16.8819L104.261 225.382L104.871 227H106.6H146.2H147.932L148.54 225.379L226.84 16.8789Z" fill="#FAFAFA" stroke="#663399" stroke-width="5"/>
         </svg>
         </a>
-        <span>
+        <!-- <span>
           <strong>
             M.Yanick
           </strong>
-        </span>
+        </span> -->
       </span>
       <ul>
         <li>
@@ -59,7 +59,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 10px 20px;
     z-index: 100;
     backdrop-filter: blur(30px);
     background: var(--background-white-color);

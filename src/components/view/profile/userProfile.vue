@@ -68,12 +68,15 @@
       getUserData(){
         onAuthStateChanged(auth,(user) =>{
           if(user != null){
+            let getName = user.displayName.split(' ')
+            console.log('Nom et prénom ', getName[0], getName[1]);
+            // let getLastName = user.displayName.split(' ')
+            // console.log('Nom ', getName[0]);
             this.userInfos.profileUser = {
-            name: user.displayName,
-            // lastName:'Yanick',
+            name: getName[0],
+            lastName: getName[1],
             // profession:'Dev Frontend'
-          }
-            console.log('Infos ', this.profileUser );
+           }
           }
         })
       },
@@ -113,6 +116,7 @@
   }
   .items-section .user-infos ul li{
     line-height: 1.5;
+    text-transform: capitalize;
   }
   .items-section .user-tab ul{
     list-style: none;
