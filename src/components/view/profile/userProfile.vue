@@ -4,14 +4,7 @@
     <bannerCover ref="bannerCover" />
     <div class="items-section">
       <div class="user-infos">
-        <div class="user-photo">
-          <img :src="userInfos.profilPhoto" alt="profil photo">
-        </div>
-        <ul>
-          <li v-for="(infos, index) in userInfos.profileUser" :key="index">
-            <strong> {{ infos }} </strong>
-          </li>
-        </ul>
+        <userInfos :userInfos="userInfos" :firstLetter="firstLetter" :secondLetter="secondLetter" ref="UserInfomation"/>
       </div>
       <div class="user-tab">
         <div class="btn-content">
@@ -33,6 +26,7 @@
   import myArticles from './myArticles'
   import topMenuUser from './topMenuUser'
   import bannerCover from './bannerCover'
+  import userInfos from './userInfos'
   import { auth, db } from '../../../firebase'
   import { collection, doc, getDoc } from "firebase/firestore"; 
   import { onAuthStateChanged } from 'firebase/auth'
@@ -42,18 +36,23 @@
       aboutUser,
       myArticles,
       topMenuUser,
-      bannerCover
+      bannerCover,
+      userInfos
     },
     data (){
       return{
+        avatarUser:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
         userInfos:{
-          profilPhoto:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
+          profilPhoto: '', 
+          // profilPhoto:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
           profileUser:{
-            name: 'MOUSSOUNDA',
-            lastName:'Yanick',
-            profession:'Dev Frontend'
+            // name: 'MOUSSOUNDA',
+            // lastName:'Yanick',
+            // profession:'Dev Frontend'
           }
         },
+        firstLetter: '',
+        secondLetter: '',
         tabs:[{name:'A Propos de moi', component:'aboutUser'},
         {name:'Mes Articles', component:'myArticles'}],
         currentComponent: "aboutUser",
@@ -69,14 +68,12 @@
         onAuthStateChanged(auth,(user) =>{
           if(user != null){
             let getName = user.displayName.split(' ')
-            console.log('Nom et prénom ', getName[0], getName[1]);
-            // let getLastName = user.displayName.split(' ')
-            // console.log('Nom ', getName[0]);
             this.userInfos.profileUser = {
-            name: getName[0],
-            lastName: getName[1],
-            // profession:'Dev Frontend'
-           }
+              name: getName[0],
+              lastName: getName[1],
+            }
+            this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
+            this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
           }
         })
       },
@@ -102,41 +99,8 @@
   .items-section .user-tab{
     flex: 2;
   }
-  .items-section .user-photo{
-    position: relative;
-    width: 250px;
-    height: 250px;
-    background: var(--orange-color);
-    border-radius: 50%;
-  }
-  .items-section .user-infos ul{
-    list-style: none;
-    margin: 10px 20px;
-    font-size: 1.2rem;
-  }
-  .items-section .user-infos ul li{
-    line-height: 1.5;
-    text-transform: capitalize;
-  }
-  .items-section .user-tab ul{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    font-size: 1.5rem ;
-    cursor: pointer;
-  }
-  .items-section .user-tab ul li{
-   margin: 0 10px;
-  }
-  .items-section .user-photo img{
-    position: absolute;
-    height: inherit;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 50%
-  }
  
-  .items-section button.link-btn a span{
+  .items-section button.link-btn a h1{
     margin-bottom: 10px;
     font-size: 1.5rem;
   }
