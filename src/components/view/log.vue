@@ -130,11 +130,12 @@ export default {
         console.log('Connexion ');
       } 
     },
+    // New user created
     signUp(){
       createUserWithEmailAndPassword(auth, this.createUser.email, this.createUser.passWord )    
       .then( async (response) =>{
         const user = response.user;
-        await setDoc(doc(db, 'users', user.uid),{
+        const userId = await setDoc(doc(db, 'users', user.uid),{
           firstName: this.createUser.firstName,
           surName: this.createUser.surName,
           email: this.createUser.email,
@@ -143,7 +144,7 @@ export default {
           photoUrl: ''
         })
         // const user = response.user;
-        console.log('displayName ',user);
+        console.log('displayName and userId', user, ' docId ', userId);
         updateProfile(user, { displayName: this.createUser.firstName + ' ' + this.createUser.surName })
         this.$router.push('/components/view/profile/userProfile')
         this.showModalSignUp = false
@@ -154,12 +155,11 @@ export default {
         console.log('erreur ', errorCode, errorMessage);
       });
     },
+    // Connexion  User
     signIn(){
       signInWithEmailAndPassword(auth, this.connectUser.email, this.connectUser.passWord)
       .then(response =>{
         this.$router.push('/components/view/profile/userProfile')
-        // const connectedUser = response.user
-        // console.log('Utilisateur connecté ', connectedUser);
       })
       .catch((error) => {
         const errorCode = error.code;

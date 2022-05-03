@@ -26,9 +26,9 @@
       </span>
       <ul>
         <li>
-          <!-- <router-link :to="{ name: 'userProfile' }">
+          <router-link :to="{ name: 'userProfile' }">
             home
-          </router-link> -->
+          </router-link>
         </li>
         <li @click="openSignUp">Inscription</li>
         <li @click="openSignIn">Connexion</li>
@@ -94,7 +94,7 @@
     margin: 0 10px;
   }
   nav ul li:nth-child(2){
-    padding: 8px 10px;
+    padding: 8px 20px;
     border-radius: 20px;
     color: var(--text-purple-color);
     background: #fff;

@@ -22,14 +22,14 @@
 </template>
 
 <script>
-  import aboutUser from './aboutUser'
-  import myArticles from './myArticles'
-  import topMenuUser from './topMenuUser'
-  import bannerCover from './bannerCover'
-  import userInfos from './userInfos'
-  import { auth, db } from '../../../firebase'
+  import aboutUser from './aboutUser';
+  import myArticles from './myArticles';
+  import topMenuUser from './topMenuUser';
+  import bannerCover from './bannerCover';
+  import userInfos from './userInfos';
+  import { auth, db } from '../../../firebase';
   import { collection, doc, getDoc } from "firebase/firestore"; 
-  import { onAuthStateChanged } from 'firebase/auth'
+  import { onAuthStateChanged } from 'firebase/auth';
   export default {
     name: 'userProfile',
     components:{
@@ -72,12 +72,12 @@
               name: getName[0],
               lastName: getName[1],
             }
+            // this.userInfos.profilPhoto = this.avatarUser
             this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
             this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
           }
         })
       },
-
     },
     mounted(){
       this.getUserData()

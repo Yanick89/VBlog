@@ -31,7 +31,8 @@ export default {
         userInfos:{
             default: {}
         }
-    }
+    },
+    data:{}
 }
 </script>
 
@@ -41,7 +42,7 @@ export default {
     position: relative;
     width: 250px;
     height: 250px;
-    background: var(--orange-color);
+    background: var(--background-purple-color);
     border-radius: 50%;
   }
   .user-photo h1{
@@ -51,6 +52,8 @@ export default {
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    color: #fff;
+    -webkit-text-stroke: 6px;
   }
   .user-infos ul{
     list-style: none;

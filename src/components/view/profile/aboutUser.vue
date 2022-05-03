@@ -115,7 +115,6 @@ export default {
       }
     },
     save() {
-      // console.log('test ', this.selectImg);
       this.selectImg();
       this.comment.text = this.writting;
       this.showWriten = false;
@@ -134,146 +133,146 @@ export default {
 </script>
 
 <style scoped>
-.about-write {
-  width: 100%;
-}
-.about-write .show-comment {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.about-write .show-comment h3 {
-  text-align: center;
-  margin: 8px 0;
-}
-.about-write .show-comment img {
-  width: 100%;
-}
-.about-write .show-comment p {
-  line-height: 1.5;
-  word-spacing: 7.5px;
-  font-size: 1.3rem;
-  text-align: justify;
-  text-transform: capitalize;
-}
-.about-write .write-comment {
-  margin: 30px 0;
-}
-.about-write .write-comment .img-label{
-  margin: 10px 0;
-  cursor: pointer;
-}
-.about-write .write-comment .img-label img{
-  width: 100%;
-  /* height: 375px;
-  object-fit: cover; */
-}
-.about-write .write-comment .img-label svg{
-  fill: rgba(55, 53, 47, 0);
-  transition: fill .3s ease-in-out;
-}
-.about-write .write-comment:hover svg{
-  fill: rgba(55, 53, 47, 0.35);
-  transition: .2s ease-in-out;
-}
-.about-write .show-comment .show-btn-write button {
-  opacity: 0;
-  transition: opacity, 0.2s;
-}
-.about-write .show-comment:hover .show-btn-write button {
-  opacity: 1;
-  padding: 10px;
-  outline: none;
-  font-size: 1.2rem;
-  border: 1px solid var(--border-dark-thin);
-  background: #fff;
-  cursor: pointer;
-  margin-left: 20px;
-  color: #ccc;
-  border-radius: 50%;
-}
-.about-write .write-comment form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.about-write .write-comment .text-emoji {
-  position: relative;
-  width: 100%;
-  display: flex;
-  border: 1px solid var(--border-dark-thin);
-  width: 65%;
-  border-radius: 10px;
-  padding: 8px 16px;
-}
-/* section emoji */
-.about-write .write-comment .text-emoji .emoji-picker {
-  position: absolute;
-  right: 10px;
-}
-.about-write .write-comment .text-emoji .emoji-picker button {
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1.2rem;
-  transition: animation 8s ease-in-out;
-}
-.about-write .write-comment .text-emoji .emoji-picker button:hover {
-  animation: btn-anime 0.7s forwards;
-}
-@keyframes btn-anime {
-  0% {
-    transform: rotate(0);
+  .about-write {
+    width: 100%;
   }
-  25% {
-    transform: rotate(22deg);
+  .about-write .show-comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  50% {
-    transform: rotate(-22deg);
+  .about-write .show-comment h3 {
+    text-align: center;
+    margin: 8px 0;
   }
-  75% {
-    transform: rotate(15deg);
+  .about-write .show-comment img {
+    width: 100%;
   }
-  100% {
-    transform: rotate(0deg);
+  .about-write .show-comment p {
+    line-height: 1.5;
+    word-spacing: 7.5px;
+    font-size: 1.3rem;
+    text-align: justify;
+    text-transform: capitalize;
   }
-}
-#Emojis[data-v-5c988bee] {
-  height: 220px !important;
-}
-.container-emoji[data-v-5c988bee] {
-  max-height: 324px !important;
-}
-.about-write .write-comment textarea {
-  resize: none;
-  overflow: hidden;
-  width: 100%;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #424040;
-  font-family: "Nunito Sans", sans-serif;
-  outline: none;
-  border: none;
-  padding-right: 1rem;
-}
-.about-write .write-comment form .footer-btn button {
-  padding: 10px 16px;
-  border-radius: 20px;
-  outline: none;
-  border: none;
-  background: #fff;
-  color: var(--text-dark-secondary);
-  cursor: pointer;
-  border: 1px solid var(--border-dark-thin);
-}
-.about-write .write-comment form .footer-btn button:last-child {
-  background: var(--background-btn-dark-light);
-  margin-left: 5px;
-  color: #f1f1f1;
-  border: none;
-}
-.about-write .write-comment form .footer-btn button.btnActive {
-  background: var(--background-btn-dark);
-}
+  .about-write .write-comment {
+    margin: 30px 0;
+  }
+  .about-write .write-comment .img-label{
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  .about-write .write-comment .img-label img{
+    width: 100%;
+    /* height: 375px;
+    object-fit: cover; */
+  }
+  .about-write .write-comment .img-label svg{
+    fill: rgba(55, 53, 47, 0);
+    transition: fill .3s ease-in-out;
+  }
+  .about-write .write-comment:hover svg{
+    fill: rgba(55, 53, 47, 0.35);
+    transition: .2s ease-in-out;
+  }
+  .about-write .show-comment .show-btn-write button {
+    opacity: 0;
+    transition: opacity, 0.2s;
+  }
+  .about-write .show-comment:hover .show-btn-write button {
+    opacity: 1;
+    padding: 10px;
+    outline: none;
+    font-size: 1.2rem;
+    border: 1px solid var(--border-dark-thin);
+    background: #fff;
+    cursor: pointer;
+    margin-left: 20px;
+    color: #ccc;
+    border-radius: 50%;
+  }
+  .about-write .write-comment form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .about-write .write-comment .text-emoji {
+    position: relative;
+    width: 100%;
+    display: flex;
+    border: 1px solid var(--border-dark-thin);
+    width: 65%;
+    border-radius: 10px;
+    padding: 8px 16px;
+  }
+  /* section emoji */
+  .about-write .write-comment .text-emoji .emoji-picker {
+    position: absolute;
+    right: 10px;
+  }
+  .about-write .write-comment .text-emoji .emoji-picker button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    transition: animation 8s ease-in-out;
+  }
+  .about-write .write-comment .text-emoji .emoji-picker button:hover {
+    animation: btn-anime 0.7s forwards;
+  }
+  @keyframes btn-anime {
+    0% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(22deg);
+    }
+    50% {
+      transform: rotate(-22deg);
+    }
+    75% {
+      transform: rotate(15deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+  #Emojis[data-v-5c988bee] {
+    height: 220px !important;
+  }
+  .container-emoji[data-v-5c988bee] {
+    max-height: 324px !important;
+  }
+  .about-write .write-comment textarea {
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #424040;
+    font-family: "Nunito Sans", sans-serif;
+    outline: none;
+    border: none;
+    padding-right: 1rem;
+  }
+  .about-write .write-comment form .footer-btn button {
+    padding: 10px 16px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    background: #fff;
+    color: var(--text-dark-secondary);
+    cursor: pointer;
+    border: 1px solid var(--border-dark-thin);
+  }
+  .about-write .write-comment form .footer-btn button:last-child {
+    background: var(--background-btn-dark-light);
+    margin-left: 5px;
+    color: #f1f1f1;
+    border: none;
+  }
+  .about-write .write-comment form .footer-btn button.btnActive {
+    background: var(--background-btn-dark);
+  }
 </style>
