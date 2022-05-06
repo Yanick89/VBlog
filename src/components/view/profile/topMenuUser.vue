@@ -35,7 +35,7 @@
             Ecrit ton postes
           </router-link>
         </li>
-        <li> <userAvatar ref="user"/></li>
+        <li> <userAvatar :userInfos="userInfos" :firstLetter="firstLetter" :secondLetter="secondLetter" ref="user"/></li>
       </ul>
     </nav>
   </div>
@@ -44,10 +44,24 @@
 <script>
 import userAvatar from '../userAvatar'
 export default {
-    name: 'topMenuUser',
-    components:{
-      userAvatar
-    }
+  name: 'topMenuUser',
+  props:{
+    firstLetter:{
+      default: null,
+      type: String
+    },
+    secondLetter:{
+      default: null,
+      type: String
+    },
+    userInfos:{
+      default: {},
+      type: Object
+  }
+},
+  components:{
+    userAvatar
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="user">
-    <topMenuUser ref="topMenuUser"/>
+    <topMenuUser :userInfos="userInfos" :firstLetter="firstLetter" :secondLetter="secondLetter" ref="topMenuUser"/>
     <bannerCover ref="bannerCover" />
     <div class="items-section">
       <div class="user-infos">
@@ -28,7 +28,7 @@
   import bannerCover from './bannerCover';
   import userInfos from './userInfos';
   import { auth, db } from '../../../firebase';
-  import { collection, doc, getDoc } from "firebase/firestore"; 
+  import { collection, doc, getDocs } from "firebase/firestore"; 
   import { onAuthStateChanged } from 'firebase/auth';
   export default {
     name: 'userProfile',
@@ -45,11 +45,7 @@
         userInfos:{
           profilPhoto: '', 
           // profilPhoto:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
-          profileUser:{
-            // name: 'MOUSSOUNDA',
-            // lastName:'Yanick',
-            // profession:'Dev Frontend'
-          }
+          profileUser:{}
         },
         firstLetter: '',
         secondLetter: '',
@@ -67,20 +63,35 @@
       getUserData(){
         onAuthStateChanged(auth,(user) =>{
           if(user != null){
-            let getName = user.displayName.split(' ')
-            this.userInfos.profileUser = {
-              name: getName[0],
-              lastName: getName[1],
-            }
-            // this.userInfos.profilPhoto = this.avatarUser
-            this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
-            this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
+            let getName = user.displayName
+            // this.userInfos.profileUser = {
+            //   name: getName[0],
+            //   lastName: getName[1],
+            // }
+            // this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
+            // this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
           }
         })
       },
+      async getUser(){
+      this.getUserData()
+      const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data()
+          this.userInfos.profileUser = {
+            name: data.firstName,
+            lastName: data.surName,
+            uid: data.uid
+          }
+          localStorage.setItem('userSession', JSON.stringify(this.infosUser))
+          this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
+          this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
+      });
+        console.log('user id ', this.userId);
+      }      
     },
     mounted(){
-      this.getUserData()
+      this.getUser()
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="user-infos">
-      <div class="user-photo" v-if="userInfos.profilPhoto != ''">
+      <div class="user-photo" v-if="userInfos.profilPhoto">
             <img :src="userInfos.profilPhoto" alt="profil photo">
         </div>
         <div class="user-photo" v-else>

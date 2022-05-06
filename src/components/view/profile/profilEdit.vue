@@ -95,7 +95,8 @@ export default {
       infosUser:{},
       firstLetterIcon: '',
       secondLetterIcon: '',
-      photoUrl: ''
+      photoUrl: '',
+      userId: JSON.parse(localStorage.getItem('userSession')).uid,
     };
   },
   methods: {
@@ -127,10 +128,12 @@ export default {
           const data = doc.data()
           this.infosUser = {
             name: data.firstName,
-            lastName: data.surName
+            lastName: data.surName,
+            uid: data.uid
           }
+          localStorage.setItem('userSession', JSON.stringify(this.infosUser))
       });
-      console.log('user id ', querySnapshot.id);
+      console.log('user id ', this.userId);
     }
   },
   mounted(){

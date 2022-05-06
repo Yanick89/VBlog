@@ -3,12 +3,14 @@
     <div class="main">
       <div @click.stop="openDropDown" class="btn">
         <div class="photo">
-          <span class="default-profile">
-            <strong> MY </strong>
+          <span v-if="userInfos.profilPhoto">
+            <img :src="userInfos.profilPhoto" alt="profil photo">
           </span>
-          <!-- <span>
-            <img src="" alt="">
-          </span> -->
+          <span class="default-profile" >
+            <strong> 
+              {{ firstLetter + '' +  secondLetter}}
+            </strong>
+          </span>
         </div>
       </div>
       <div v-if="show" v-outclick:openDropDown="closeDropDown" class="dropdown">
@@ -144,6 +146,19 @@ import { auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 export default {
   name: 'user',
+   props:{
+      firstLetter:{
+          default: null,
+          type: String
+      },
+      secondLetter:{
+          default: null,
+          type: String
+      },
+      userInfos:{
+          default: {}
+      }
+    },
   data () {
     return {
       show: false  
@@ -175,15 +190,34 @@ export default {
   }
   .main .photo{
     position: relative;
-    height: 35px;
-    width: 35px;
+    height: 33px;
+    width: 33px;
     border-radius: 50%;
+    background: var(--background-purple-color);
+  }
+  .main .photo::before{
+    position: absolute;
+    right: -7px;
+    top: 14px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    content: "";
+    border-style: solid;
+    border-width: 4px 4px 0;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
   }
   .main .photo .default-profile strong{
     position: absolute;
     transform: translate(-50%, -50%);
-    left: 50%;
+    left: 49%;
     top: 50%;
+    font-weight: 200;
+    padding: 5px;
+    color: var(--text-white-primary);
   }
   .main .photo .default-profile img{
     position: absolute;
@@ -193,7 +227,7 @@ export default {
   .main .dropdown{
     background: var(--background-white-color);
     position: absolute;
-    transform: translate(-187px, 32px);
+    transform: translate(-170px, 32px);
     top: 8px;
     width: 620%;
     border-radius: 5px;
