@@ -42,11 +42,7 @@
     data (){
       return{
         avatarUser:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
-        userInfos:{
-          profilPhoto: '', 
-          // profilPhoto:'https://avatoon.me/wp-content/uploads/2020/07/Cartoon-Pic-Ideas-for-DP-Profile-03.png', 
-          profileUser:{}
-        },
+        userInfos:{},
         firstLetter: '',
         secondLetter: '',
         tabs:[{name:'A Propos de moi', component:'aboutUser'},
@@ -64,30 +60,25 @@
         onAuthStateChanged(auth,(user) =>{
           if(user != null){
             let getName = user.displayName
-            // this.userInfos.profileUser = {
-            //   name: getName[0],
-            //   lastName: getName[1],
-            // }
-            // this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
-            // this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
           }
         })
       },
       async getUser(){
-      this.getUserData()
-      const querySnapshot = await getDocs(collection(db, "users"));
+        this.getUserData()
+        const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
           const data = doc.data()
-          this.userInfos.profileUser = {
-            name: data.firstName,
-            lastName: data.surName,
+            this.userInfos = { 
+              profileUser : {
+                name: data.name,
+                lastName: data.lastName,          
+              },
             uid: data.uid
-          }
-          localStorage.setItem('userSession', JSON.stringify(this.infosUser))
+          };  
+          localStorage.setItem('userSession', JSON.stringify(this.userInfos))
           this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
           this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
-      });
-        console.log('user id ', this.userId);
+        }); 
       }      
     },
     mounted(){
