@@ -23,11 +23,11 @@
           <div class="formulaire">         
             <label for="name">
               Nom:
-              <input type="text" v-model="createUser.firstName" id="name" placeholder="Nom">
+              <input type="text" v-model="createUser.name" id="name" placeholder="Nom">
             </label>
             <label for="subname">
               Prénom:
-              <input type="text" v-model="createUser.surName" id="subname" placeholder="Prénom">
+              <input type="text" v-model="createUser.lastName" id="subname" placeholder="Prénom">
             </label>
             <label for="mail">
               Email:
@@ -103,8 +103,8 @@ export default {
       showModalSignIn: false,
       isActive: true,
       createUser:{
-        firstName: '',
-        surName: '',
+        name: '',
+        lastName: '',
         email:'',
         passWord:'',
         photoUrl: ''
@@ -136,16 +136,19 @@ export default {
       .then( async (response) =>{
         const user = response.user;
         const userId = await setDoc(doc(db, 'users', user.uid),{
-          firstName: this.createUser.firstName,
-          surName: this.createUser.surName,
+          name: this.createUser.name,
+          lastName: this.createUser.lastName,
           email: this.createUser.email,
           uid: user.uid,
-          // createdAt: user.createdAt,
-          photoUrl: ''
+          photoUrl: '',
+          pseudo: '',
+          pseudoName: '',
+          activity: '',
+          yourLinkWeb: ''
         })
         // const user = response.user;
         console.log('displayName and userId', user, ' docId ', userId);
-        updateProfile(user, { displayName: this.createUser.firstName + ' ' + this.createUser.surName })
+        updateProfile(user, { displayName: this.createUser.name + ' ' + this.createUser.lastName });
         this.$router.push('/components/view/profile/userProfile')
         this.showModalSignUp = false
       })     

@@ -17,7 +17,7 @@
                   </div>
                   <div v-else>
                     <h2>
-                      {{ firstLetterIcon + '' + secondLetterIcon }}
+                      {{ firstLetter + '' + secondLetter }}
                     </h2>
                   </div>
                   <label for="photo">
@@ -29,32 +29,34 @@
               <h5>Ajoutez votre photo de profil</h5>
               <div class="write-infos">
                 <label for="name">Nom:</label>
-                <input type="text" v-model="infosUser.name" name="name" id />
+                <input type="text" v-model="name" name="name" id />
                 <label for="surname">Prénom:</label>
-                <input type="text" v-model="infosUser.lastName" name="surname" id />
+                <input type="text" v-model="lastName" name="surname" id />
                 <div class="display-name">
                   <span for="displayName">Chochez pour afficher le nom:</span>
                   <br />
                   <label for="displayName">
                     <input
                       type="text"
+                      v-model="pseudo"
                       name="displayName"
                       id="displayName"
                       placeholder="Pseudo"
                     />
-                    <input type="checkbox" name id="displayName" checked />
+                    <input type="checkbox" v-model="pseudoName" name id="displayName" checked />
                   </label>
                 </div>
                 <label for="activity">Votre activité:</label>
-                <input type="text" id="activity" name placeholder="Activité" />
-                <label for="link-web">Compte Twitter:</label>
+                <input type="text" v-model="activity" id="activity" name placeholder="Activité" />
+                <label for="url">Compte Twitter:</label>
                 <input
-                  type="text"
+                  type="url"
+                  v-model="yourLinkWeb"
                   name
                   placeholder="Ajoutez un lien vers votre compte twitter"
-                  id="link-web"
+                  id="url"
                 />
-                <button>Enregistrer</button>
+                <button @click="updateUser()">Enregistrer</button>
               </div>
             </form>
           </div>
@@ -82,8 +84,9 @@
 <script>
 import iconStyle from "./iconStyle";
 import iconCamera from '../iconCamera'
-import { auth, db } from '../../../firebase'
-import { collection, doc, getDocs  } from "firebase/firestore"; 
+import { auth, db, storage } from '../../../firebase'
+import { collection, doc, getDocs, setDoc, addDoc, updateDoc, onSnapshot } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage"; 
 export default {
   name: "profilEdite",
   components: {
@@ -92,48 +95,78 @@ export default {
   },
   data() {
     return {
-      infosUser:{},
-      firstLetterIcon: '',
-      secondLetterIcon: '',
+      infosUser:[],
+      name: '',
+      lastName:'',
+      pseudo:'',
+      pseudoName: false,
+      activity: '',
+      yourLinkWeb:'',    
+      firstLetter: '',
+      secondLetter: '',
       photoUrl: '',
+      updateUserInfo:{},
       userId: JSON.parse(localStorage.getItem('userSession')).uid,
     };
   },
   methods: {
     selectImg(){
       const fileList = this.$refs.photoProfile.files
-      for(let e of fileList){
+      const storageRef = ref(storage, "images");
+      for(const e of fileList){
         const photoProfile = URL.createObjectURL(e)
         this.photoUrl = photoProfile
+        uploadBytes(storageRef, this.photoUrl).then((snapshot) => {
+          console.log('Uploaded a blob or file! ',snapshot );
+        });
         console.log('image nom ', this.photoUrl);        
       }
       
     },
-    // update user inforamtions
-    updateUser(){},
-    // get informations displayName
+    // modifications des inforamtions
+    async updateUser(){
+      this.updateUserInfo.name = this.name,
+      this.updateUserInfo.lastName = this.lastName,
+      this.updateUserInfo.pseudo = this.pseudo,
+      this.updateUserInfo.pseudoName = this.pseudoName,
+      this.updateUserInfo.activity = this.activity,
+      this.updateUserInfo.yourLinkWeb = this.yourLinkWeb,
+      this.firstLetter = this.name.charAt(0).toUpperCase(),
+      this.secondLetter = this.lastName.charAt(0).toUpperCase();
+      const udpateRef = doc(db, "users", this.userId);
+      await updateDoc(udpateRef, this.updateUserInfo).then(onSnapshot=>{
+        
+        console.log('Réussi ',this.updateUserInfo );
+      })
+    },
+    // Récupération des informations avec displayName
     getDisplayName(){
       const user = auth.currentUser
       if(user !== null){
         let getName = user.displayName.split(' ')
         this.firstLetterIcon = getName[0].charAt(0).toUpperCase(),
-        this.secondLetterIcon = getName[1].charAt(0).toUpperCase()
+        this.secondLetter = getName[1].charAt(0).toUpperCase()
       }
     },
-    // Get informartion user
+    // Récupération de toutes les infos dans le document
     async getUser(){
       this.getDisplayName()
       const querySnapshot = await getDocs(collection(db, "users"));
         querySnapshot.forEach((doc) => {
           const data = doc.data()
-          this.infosUser = {
-            name: data.firstName,
-            lastName: data.surName,
-            uid: data.uid
-          }
-          localStorage.setItem('userSession', JSON.stringify(this.infosUser))
+          this.infosUser.push(data);
+          this.infosUser.forEach(user =>{
+            this.name = user.name,
+            this.lastName = user.lastName,
+            this.photoUrl = user.photoUrl,
+            this.pseudo = user.pseudo,
+            this.pseudoName = user.pseudoName,
+            this.activity = user.activity,
+            this.yourLinkWeb = user.yourLinkWeb,
+            this.firstLetter = user.name.charAt(0).toUpperCase()
+            this.secondLetter = user.lastName.charAt(0).toUpperCase()
+          })
       });
-      console.log('user id ', this.userId);
     }
   },
   mounted(){
