@@ -1,124 +1,105 @@
 <template>
-    <div class="cover-section">
-      <button @click="showBanner()" :class="{activePosition}">
-        <span v-if="changeBtn">📷Ajouter un arrière plan</span>
-        <span v-else @click.stop="openDialog">
-          📷 Changer l'arrière plan
-        </span>
-      </button>
-      <div v-if="addCover" :style="defaultBanner" class="cover-default">
-      </div>
-       <!-- =======* choose cover component *=======-->
-      <div v-if="modalCover" class="content-modal" >
-        <chooseCover
-         v-outclick:openDialog="closeDialog"
-         :modalCover="modalCover"
-         :defaultBanner="defaultBanner"
-          ref="chooseCover"/>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  import chooseCover from './chooseCover';
-  import link from './coverByLink'
-  import mixin from '../../../mixin'
-  export default {
-    name: 'bannerCover',
+  <div class="bg-link">
+    <ul>
+        <li v-for="(link, index) in links" :key="index + 'lien'" @click="switchTab(link.component, index)" :class="{'active' : linkActive === index}">
+            {{ link.name }}
+        </li>
+    </ul>
+    <keep-alive>
+        <component 
+            @colorPicker="changeColor"
+            @imgPicker="changeImg"
+            @sendImg="changeByLink"
+            @sendingImg="changeUpload"
+            :is="defaultComponent" />
+    </keep-alive>
+  </div>
+</template>
+
+<script>
+import defaultChoose from './defaultChoose';
+import coverByLink from './coverByLink';
+import importCover from './importCover';
+export default {
+    name: 'chooseCover',
     components:{
-      chooseCover,
-      link
+        defaultChoose,
+        coverByLink,
+        importCover
     },
-    mixins:[mixin],
-    data(){
-      return{
-        addCover: false,
-        activePosition: false,
-        changeBtn: true,
-        defaultBanner:{
-          width: '100%',
-          height:'180px',
-          background: 'url("https://i.eurosport.com/2017/10/23/2193314-45823610-2560-1440.jpg")',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
+    props:{
+        modalCover:{
+            type: Boolean,
+            default(){
+                false
+            }
         },
-        modalCover: false
-      }
+        defaultBanner:{
+            type: Object,
+            default(){
+                {}
+            }
+        }       
+    },
+    data (){
+        return{
+            links:[
+                {name: 'Choisir', component:'defaultChoose'},
+                {name: 'Importer', component:'importCover'},
+                {name: 'Lien', component:'coverByLink'}
+            ],
+            defaultComponent: 'defaultChoose',
+            linkActive: 0
+        }
     },
     methods:{
-      changingColor(picker){
-        alert('color')
-      },
-      showBanner(){
-        if(this.changeBtn = true){
-          this.changeBtn = false
+        switchTab(component, index){
+            this.defaultComponent = component;
+            this.linkActive = index
+        },
+        changeColor(picker){
+            this.defaultBanner.background = picker
+        },
+        changeImg(img){
+            this.defaultBanner.background = `url('${img}')`
+        },
+        changeByLink(imgByLink){
+            this.defaultBanner.background = `url('${imgByLink}')`
+        },
+        changeUpload(uploadImg){
+            this.defaultBanner.background = `url('${uploadImg}')`
+           console.log('reussi ', uploadImg);
         }
-        this.addCover = true;
-        this.activePosition = true
-      },
-      openDialog(value){
-        this.modalCover = true
-      }, 
-      closeDialog(){
-        this.modalCover = false
-      }
     },
-  }
-  </script>
-  
-  <style scoped>
-    .cover-section{
-      position: relative;
-      padding-top: 60px;
-      padding-bottom: 20px;
-      transition: all .6s ease-out;
-     }
-    .cover-section button{
-      opacity: 0;
-      padding: 0;
-      position: absolute;
-      transform: translateY(15px);
+}
+</script>
+
+<style scoped>
+    .bg-link{
+        position: absolute;
+        top: 0;
+        right: 48px;
+        transform: translate(0, -35px);
+        background: #fff;
+        width: 30%;
+        border-radius: 5px;
+        z-index:100;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     }
-    .cover-section button span{
-      display: flex;
-      align-items: center;
-      padding: 3px 5px;
+    ul{
+        list-style: none;
+        display: flex;
+        justify-content: space-around; 
+        margin: 15px 2px;
+        color: #ccc;
+        cursor: pointer;
     }
-    .cover-section button span:last-child{
-      position: relative;
-      /* z-index: 300; */
+    ul li:hover{
+        color: var(--text-dark-tertiary);
+        transition: all ease-in-out .2s;
     }
-  
-    .cover-section:hover button{
-      opacity: 1;
-      position: absolute;
-      transform: translateY(15px);
-      right: 25%;
-      border: none;
-      outline: none;
-      font-weight: 600;
-      border-radius: 2px;
-      cursor: pointer;
-      background: #f8f8f8;
-      box-shadow: 1px 2px 3px #ccc;
-    } 
-    .cover-section button.activePosition{
-      right: 4%;
-      bottom: 44px;
-      box-shadow: 0 0 0;
+    ul li.active{
+        color: var(--text-dark-tertiary);
+        transition: all ease .3s;
     }
-    .cover-section .cover-default{
-      background-repeat: no-repeat !important;
-      background-size: cover !important;
-      background-position: center !important;
-    }
-    .cover-section button.activePosition{
-      right: 4%;
-      bottom: 44px;
-      box-shadow: 0 0 0;
-    }
-    .content-modal{
-      position: relative;
-    }
-  </style>
+</style>
