@@ -3,6 +3,9 @@
     <nav>
       <span>VBlog</span>
       <ul>
+        <router-link :to="{name: 'userProfile'}">
+          test
+        </router-link>
         <li @click="openSignUp">Inscription</li>
         <li @click="openSignIn">Connexion</li>
         <li>
