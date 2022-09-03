@@ -9,7 +9,7 @@
             </h1>
           </div>
           <ul>
-            <li v-for="(infos, index) in userInfos.profileUser" :key="index">
+            <li v-for="(infos, index) in userInfos.infoUser" :key="index">
               <strong> {{ infos }} </strong>
             </li>
           </ul>
@@ -31,8 +31,7 @@
           userInfos:{
               default: {}
           }
-      },
-      data:{}
+      }
   }
   </script>
   
