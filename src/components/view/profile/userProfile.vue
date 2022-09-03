@@ -65,20 +65,21 @@
         },
         async getUser(){
           this.getUserData()
-          const querySnapshot = await getDocs(collection(db, "users"));
+          let querySnapshot = await getDocs(collection(db, "users"))
           querySnapshot.forEach((doc) => {
-            const data = doc.data()
-              this.userInfos = { 
-                profileUser : {
-                  name: data.name,
-                  lastName: data.lastName,          
-                },
-              uid: data.uid
-            };  
+            this.userInfos = {
+              infoUser: {
+                name: doc.data().name,
+                lastName: doc.data().lastName, 
+              },
+              uid: doc.data().uid
+            },
             localStorage.setItem('userSession', JSON.stringify(this.userInfos))
-            this.firstLetter = this.userInfos.profileUser.name.charAt(0).toUpperCase()
-            this.secondLetter = this.userInfos.profileUser.lastName.charAt(0).toUpperCase()
-          }); 
+            this.firstLetter = this.userInfos.infoUser.name.charAt(0)
+            this.secondLetter = this.userInfos.infoUser.lastName.charAt(0)
+            // this.firstLetter = this.userInfos.infoUser.charAt(0)
+            console.log('infos users :', this.userInfos.infoUser.name.charAt(0));
+          })
         }      
       },
       mounted(){
