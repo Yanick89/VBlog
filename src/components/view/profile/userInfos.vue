@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="user-photo" v-if="userInfos.profilPhoto">
-            <img :src="userInfos.profilPhoto" alt="profil photo">
+            <img :src="userInfos.profilPhoto" alt="profil photo" title="">
         </div>
         <div class="user-photo" v-else>
           <h1>
