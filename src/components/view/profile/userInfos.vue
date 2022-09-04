@@ -1,18 +1,18 @@
 <template>
-    <div class="user-infos">
+    <div>
         <div class="user-photo" v-if="userInfos.profilPhoto">
-              <img :src="userInfos.profilPhoto" alt="profil photo">
-          </div>
-          <div class="user-photo" v-else>
-            <h1>
-              {{ firstLetter + '' +  secondLetter}}
-            </h1>
-          </div>
-          <ul>
-            <li v-for="(infos, index) in userInfos.infoUser" :key="index">
-              <strong> {{ infos }} </strong>
-            </li>
-          </ul>
+            <img :src="userInfos.profilPhoto" alt="profil photo">
+        </div>
+        <div class="user-photo" v-else>
+          <h1>
+            {{ firstLetter + '' +  secondLetter}}
+          </h1>
+        </div>
+        <ul>
+          <li v-for="(infos, index) in userInfos.infoUser" :key="index">
+            <strong> {{ infos }} </strong>
+          </li>
+        </ul>
     </div>
   </template>
   
@@ -63,16 +63,7 @@
       line-height: 1.5;
       text-transform: capitalize;
     }
-    .user-tab ul{
-      list-style: none;
-      display: flex;
-      align-items: center;
-      font-size: 1.5rem ;
-      cursor: pointer;
-    }
-    .user-tab ul li{
-     margin: 0 10px;
-    }
+
     .user-photo img{
       position: absolute;
       height: inherit;
