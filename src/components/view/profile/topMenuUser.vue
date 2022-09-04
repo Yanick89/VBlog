@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="top-menu">
       <nav>
         <span>
           <a href="#">
@@ -35,7 +35,9 @@
               Ecrit ton postes
             </router-link>
           </li>
-          <li> <userAvatar :userInfos="userInfos" :firstLetter="firstLetter" :secondLetter="secondLetter" ref="user"/></li>
+          <li class="btn-img-profile"> 
+            <userAvatar :userInfos="userInfos" :firstLetter="firstLetter" :secondLetter="secondLetter" ref="user"/>
+          </li>
         </ul>
       </nav>
     </div>
@@ -65,8 +67,8 @@
   }
   </script>
   
-  <style scoped>
-    nav {
+  <style >
+    .top-menu nav {
       top: 0;
       position: fixed;
       width: 100%;
@@ -78,28 +80,51 @@
       backdrop-filter: blur(30px);
       background: var(--background-white-color);
     }
-    nav span:first-child{
+    .top-menu nav span:first-child{
       display: flex;
       align-items: center;
     }
-    svg{
+    .top-menu svg{
       height: 30px;
       width: 90px;
     }
-    nav ul{
+    .top-menu nav ul{
       list-style: none;
       display: flex;
       align-items: center;
       justify-content: space-evenly;
     }
-     nav ul li:first-child{
+    .top-menu nav ul li:first-child{
       background: var(--background-btn-purple-light);
       padding: 8px 20px;
       border-radius: 20px;
       margin-right: 8px;
-     }
-     nav ul li:first-child a{
+    }
+    .top-menu nav ul li:first-child a{
       color: var(--text-white-primary);
       text-decoration: none;
-     }
+    }
+    .btn-img-profile{
+      position: relative;
+      height: 29px;
+      width: 29px;
+      /* border: 1px solid #ccc; */
+      background: var(--background-purple-color);
+      border-radius: 50%;
+    }
+    .btn-img-profile .img-profile img{
+      position: absolute;
+      height: inherit;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 50%
+    }
+    .btn-img-profile h3.img-letter{
+      font-size: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 7px 6px;
+      color: var(--text-white-primary);
+    }
   </style>
