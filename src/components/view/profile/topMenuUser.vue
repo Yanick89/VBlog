@@ -108,9 +108,16 @@
       position: relative;
       height: 29px;
       width: 29px;
-      /* border: 1px solid #ccc; */
       background: var(--background-purple-color);
       border-radius: 50%;
+    }
+    .btn-img-profile::before{
+      content: "";
+      position: absolute;
+      border: 5px solid rgba(0, 195, 255, 0.014);
+      border-top: 5px solid var(--text-purple-color);
+      transform: translate(28px, 11px);
+      top: 0;
     }
     .btn-img-profile .img-profile img{
       position: absolute;
